@@ -1,0 +1,5 @@
+%h1 Listing cards for #{params[:month]}/#{params[:day]}
+
+- @cards.each do |card|
+  #{card.month}/#{card.day}/#{card.year} - #{card.entry}
+

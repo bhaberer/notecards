@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @card.user_id
+%p
+  %b Day:
+  = @card.day
+%p
+  %b Month:
+  = @card.month
+%p
+  %b Year:
+  = @card.year
+%p
+  %b Entry:
+  = @card.entry
+
+= link_to 'Edit', edit_card_path(@card)
+\|
+= link_to 'Back', cards_path
