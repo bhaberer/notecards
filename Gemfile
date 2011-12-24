@@ -3,10 +3,9 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 gem 'aws-s3', '0.6.2'
 gem 'paperclip', '~> 2.4.5'
-gem 'haml', '3.0.18'
-gem 'haml-rails'
+gem 'haml', '3.1.4'
+gem 'haml-rails', '~> 0.3.4'
 gem 'devise', '~> 1.4.7'
-gem 'mysql2'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -24,8 +23,10 @@ gem 'jquery-rails'
 
 # To use debugger
 
+group :development do
+  gem 'mysql'
+end
+
 group :test do
-  # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
-  gem 'ruby-debug19', :require => 'ruby-debug'
 end
