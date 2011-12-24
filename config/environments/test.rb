@@ -36,4 +36,7 @@ Notecards::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Devise needs a default URL for its mails
+  config.action_mailer.default_url_options = { :host => '192.168.1.69' }
 end

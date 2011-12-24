@@ -57,4 +57,7 @@ Notecards::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Devise needs a default URL for its mails
+  config.action_mailer.default_url_options = { :host => 'notecards.herokuapp.com' }
 end

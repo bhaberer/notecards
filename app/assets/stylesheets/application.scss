@@ -1,0 +1,20 @@
+/*
+ *= require_self
+ *= require_tree . 
+*/
+
+body { 
+  header { 
+    border-bottom: 2px solid black;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #999;
+    height: 35px;
+  }
+  .content { 
+    margin-top: 40px; 
+  }
+
+}
