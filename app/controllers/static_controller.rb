@@ -5,7 +5,7 @@ class StaticController < ApplicationController
   def index 
     respond_to do |format|
       if user_signed_in?
-        redirect_to profile_path(current_user) 
+        format.html { redirect_to profile_path(current_user) } 
       else 
         format.html
       end

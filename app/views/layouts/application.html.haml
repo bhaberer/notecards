@@ -12,10 +12,10 @@
       .alert= alert
       - if user_signed_in?
         Signed in as #{current_user.email}.
-        Not you? #{link_to "Sign out", destroy_user_session_path}
+        Not you? #{link_to "Sign out", logout_path}
       - else
-        #{link_to "Sign up", new_user_registration_path, :rel => 'facebox'} or
-        #{link_to "sign in", new_user_session_path, :rel => 'facebox'}
+        #{link_to "Sign up", signup_path, :rel => 'facebox'} or
+        #{link_to "sign in", login_path, :rel => 'facebox'}
     %nav
     .content= yield
     %footer

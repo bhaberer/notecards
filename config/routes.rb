@@ -1,6 +1,14 @@
 Notecards::Application.routes.draw do
  
-  devise_for :users
+  devise_for :users do
+    get 'login', :to => "devise/sessions#new"
+    get 'forgot', :to => "devise/passwords#new"
+    get 'logout', :to => "devise/sessions#destroy"
+    get 'signup', :to => "devise/registrations#new"
+    get 'profile', :to => "devise/registrations#edit"
+    get 'resend', :to => "devise/confirmations#new"
+  end
+
 
   scope ":username", :as => 'user' do 
     match ':month' => 'cards#month'
