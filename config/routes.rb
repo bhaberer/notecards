@@ -1,5 +1,7 @@
 Notecards::Application.routes.draw do
  
+  devise_for :users
+
   scope ":username", :as => 'user' do 
     match ':month' => 'cards#month'
     match ':month/:day' => 'cards#day'
@@ -7,8 +9,6 @@ Notecards::Application.routes.draw do
   end
 
   match ':username' => 'static#home', :as => :profile
-
-  devise_for :users
 
   root :to => "static#index"
 
