@@ -8,9 +8,9 @@ describe 'Cards' do
   end
 
   it "should require an entry shorter than 365 chars" do
-    Card.create(:month => 1, :day => 1, :year => 2000, :entry => ActiveSupport::SecureRandom.random_bytes(366)).should_not be_valid
-    Card.create(:month => 1, :day => 1, :year => 2000, :entry => ActiveSupport::SecureRandom.random_bytes(365)).should be_valid
-    Card.create(:month => 1, :day => 1, :year => 2000, :entry => ActiveSupport::SecureRandom.random_bytes(1)).should be_valid
+    Card.create(:month => 1, :day => 1, :year => 2000, :entry => SecureRandom.random_bytes(366)).should_not be_valid
+    Card.create(:month => 1, :day => 1, :year => 2000, :entry => SecureRandom.random_bytes(365)).should be_valid
+    Card.create(:month => 1, :day => 1, :year => 2000, :entry => SecureRandom.random_bytes(1)).should be_valid
   end
 
   it "should require a day" do
