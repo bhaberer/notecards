@@ -30,4 +30,8 @@ Notecards::Application.configure do
 
   # Devise needs a default URL for its mails
   config.action_mailer.default_url_options = { :host => '192.168.1.69' }
+
+  # Time zone
+  config.time_zone = "Pacific Time (US & Canada)"
+
 end

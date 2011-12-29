@@ -1,6 +1,9 @@
 Notecards::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Time zone
+  config.time_zone = "Pacific Time (US & Canada)"
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
