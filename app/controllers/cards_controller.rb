@@ -51,9 +51,9 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(:entry => params[:card][:entry],
-                     :day => Time.now.day,
-                     :month => Time.now.month,
-                     :year => Time.now.year,
+                     :day => Time.zone.now.day,
+                     :month => Time.zone.now.month,
+                     :year => Time.zone.now.year,
                      :user => current_user)
 
     respond_to do |format|
