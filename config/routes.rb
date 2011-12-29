@@ -12,8 +12,8 @@ Notecards::Application.routes.draw do
 
   scope ":username", :as => 'user' do 
     resources :cards
-    match ':month' => 'cards#month'
-    match ':month/:day' => 'cards#day'
+    match ':month' => 'cards#month',      :as => :month
+    match ':month/:day' => 'cards#day',   :as => :day
   end
 
   match ':username' => 'static#home', :as => :profile

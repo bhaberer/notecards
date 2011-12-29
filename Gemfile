@@ -40,6 +40,6 @@ group :test do
   gem 'cucumber-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner', '0.5.2'
-  gem 'webrat', '0.7.0'
-  gem 'rcov'
+  gem 'simplecov', :require => false
+  gem 'capybara'
 end
