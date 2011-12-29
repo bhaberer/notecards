@@ -54,15 +54,13 @@ class CardsController < ApplicationController
                      :day => Time.now.day,
                      :month => Time.now.month,
                      :year => Time.now.year,
-                     :user_id => current_user)
+                     :user => current_user)
 
     respond_to do |format|
       if @card.save
         format.html { redirect_to profile_path(current_user), :notice => 'Card was successfully created.' }
-        format.json { render :json => @card, :status => :created, :location => @card }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @card.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -73,10 +71,8 @@ class CardsController < ApplicationController
     respond_to do |format|
       if @card.update_attributes(params[:card])
         format.html { redirect_to @card, :notice => 'Card was successfully updated.' }
-        format.json { head :ok }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @card.errors, :status => :unprocessable_entity }
       end
     end
   end
