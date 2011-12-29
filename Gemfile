@@ -25,8 +25,21 @@ gem 'jquery-rails'
 
 group :development do
   gem 'mysql'
+  gem 'rspec-rails', "~> 2.6"
+  gem 'rspec'
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'turn', '0.8.2', :require => false
+  gem 'rspec'
+  gem 'rspec-rails', "~> 2.6"
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner', '0.5.2'
+  gem 'webrat', '0.7.0'
+  gem 'rcov'
 end
