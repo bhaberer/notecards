@@ -2,7 +2,7 @@
   - if entry_today? 
     %h2 You already wrote on today's notecard. :P
 
-  %h2 Card for #{Time.now.month}/#{Time.now.day}
+  %h2 Card for #{Time.now}
   = form_for @card, :url => user_cards_path(current_user.username) do |f|
     -if @card.errors.any?
       #error_explanation
