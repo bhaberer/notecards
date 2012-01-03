@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :auth_check 
 
   def index
     @cards = Card.all
@@ -58,7 +60,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to profile_path(current_user), :notice => 'Card was successfully created.' }
+        format.html { redirect_to root_path, :notice => 'Your card was written on successfully' }
       else
         format.html { render :action => "new" }
       end
@@ -86,4 +88,17 @@ class CardsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private 
+
+  def auth_check 
+    user = User.find_by_username(params[:username])
+    
+    if user.present?  
+      unless user == current_user || user.public?
+        redirect_to(root_path, :notice => "Sorry, that user's cards are private")
+      end    
+    end
+  end
+
 end

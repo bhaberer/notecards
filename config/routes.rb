@@ -1,5 +1,5 @@
 Notecards::Application.routes.draw do
- 
+
   devise_for :users do
     get 'login', :to => "devise/sessions#new"
     get 'forgot', :to => "devise/passwords#new"
