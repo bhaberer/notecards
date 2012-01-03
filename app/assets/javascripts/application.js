@@ -7,3 +7,32 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+  
+$(document).ready(function() {
+  $(document).find('.field input').each(function(index) {
+    $(this).focus(function() { 
+      $(this).parent().addClass('active');
+      $(this).next().hide();
+    });
+    $(this).blur(function() { 
+      $(this).parent().removeClass('active');
+      if ($(this).val() == "") {
+        $(this).next().show();
+      }
+    });
+  });
+});
+
+$(document).ready(function() {
+  $(document).find('.field span').each(function(index) {
+    if ($(this).prev().val() != "") {
+      $(this).hide();
+    }
+    $(this).live('click', function(e) {
+      $(this).hide();
+      $(this).prev().focus();
+    });
+  });
+});
+
+

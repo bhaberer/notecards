@@ -20,8 +20,14 @@
           %li= link_to "Profile", profile_path(current_user.username)
           %li= link_to "Account Info", '#'
         - else
-          %li= link_to "Sign up", signup_path, :rel => 'facebox'
-          %li= link_to "Sign in", login_path, :rel => 'facebox'
-      
-    .content= yield
+          - if params[:controller] == 'devise/sessions'
+            %li= link_to "Sign up", signup_path, :rel => 'facebox'
+            %li= link_to "Reset Password", forgot_path, :rel => 'facebox'
+          - elsif params[:controller] == 'devise/registrations'
+            %li= link_to "Sign in", login_path, :rel => 'facebox'
+          - else 
+            %li= link_to "Sign up", signup_path, :rel => 'facebox'
+            %li= link_to "Sign in", login_path, :rel => 'facebox'
+
+    #main= yield
     %footer
