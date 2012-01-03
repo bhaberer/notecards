@@ -127,26 +127,25 @@ body {
     label,input { 
       vertical-align: middle;
     }
-
-
   }
   .submit { 
-    position: relative;
-    border: 1px solid $accent;
-    border-radius: 3px;
-    font-size: 18px;
     width: 90px;
-    padding: 5px 7px;
-    border-image: initial;
-    margin: 5px 0px 0 13px;
-    cursor: pointer;
-    &:hover {
-      background-color: lighten($accent, 60%);
-      box-shadow: 0 0 5px $accent;
-    }
-
   }
 
 }
 
+.submit { 
+  position: relative;
+  border: 1px solid $accent;
+  border-radius: 3px;
+  font-size: 18px;
+  padding: 5px 7px;
+  border-image: initial;
+  margin: 5px 0px 0 13px;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten($accent, 60%);
+    box-shadow: 0 0 5px $accent;
+  }
+}
 

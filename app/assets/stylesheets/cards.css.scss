@@ -38,6 +38,13 @@ $accent: #2E1E3F;
     .text { 
       width: 400px;
       float: left;    
+      textarea { 
+        outline: none;
+        margin: 0;
+        line-height: 23px;
+        background: none;
+        border: 0;
+      }
     } 
   }
 }
