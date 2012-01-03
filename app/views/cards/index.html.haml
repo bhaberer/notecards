@@ -1,27 +1,6 @@
-%h1 Listing cards
-
-%table
-  %tr
-    %th User
-    %th Day
-    %th Month
-    %th Year
-    %th Entry
-    %th
-    %th
-    %th
-
-  - @cards.each do |card|
-    %tr
-      %td= card.user_id
-      %td= card.day
-      %td= card.month
-      %td= card.year
-      %td= card.entry
-      %td= link_to 'Show', card
-      %td= link_to 'Edit', edit_card_path(card)
-      %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Card', new_card_path
+.content 
+  %ul
+    - current_user.cards.each do |card| 
+      %li 
+        #{link_to card.month, user_month_path(current_user, card.month)}/#{link_to card.day, user_day_path(current_user, card.month, card.day)}/#{card.year} -
+        = card.entry   

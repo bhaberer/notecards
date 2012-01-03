@@ -17,7 +17,21 @@ $accent: #2E1E3F;
   opacity: .95;
 }
 
+a { 
+  color: $medium;
+  text-decoration: none;
+  &:hover { 
+    text-shadow: 0 0 1px $accent;
+    text-decoration: underline;
+  }
+}
+.clear { clear: both; } 
+
 body { 
+  background: url('clutter.jpg');
+  background-position: center middle;
+  font-family: helvetica;
+  color: $dark;
   .notice {
     @include defdiv;
     margin: 0;
@@ -28,8 +42,6 @@ body {
     padding: 5px 30px;
     border-radius: 0 0 3px 3px ;
   }
-  background: url('clutter.jpg');
-  background-position: center middle;
   nav { 
     ul { 
       margin: 0;

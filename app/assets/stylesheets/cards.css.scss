@@ -1,3 +1,43 @@
-// Place all the styles related to the cards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$light: #ADAAB0;
+$medium: #5E5C60;
+$dark: #333333;
+$accent: #2E1E3F;
+
+@mixin defdiv { 
+  background: $light;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px $accent;
+  border-radius: 3px;
+  opacity: .95;
+}
+
+
+.card { 
+  background-image: url("notebg.jpg");
+  width: 450px;
+  padding: 0 15px 20px;
+  margin: 20px auto;
+  box-shadow: 0 0 5px $accent;
+  border: 1px solid black;
+  br { line-height: 23px; } 
+
+  h2 { 
+    font-size: 24px;
+    font-weight: normal;
+    font-family: courier;
+    margin: 0;
+  }
+  .entry { 
+    line-height: 23px;
+    .year { 
+      width: 50px;
+      float: left;
+    }
+    .text { 
+      width: 400px;
+      float: left;    
+    } 
+  }
+}
