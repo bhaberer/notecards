@@ -22,4 +22,6 @@ Notecards::Application.routes.draw do
 
   root :to => "static#index"
 
+  # Hack to allow custome 404 partial, since rails doesn't let me override RoutingError atm
+  match '*a', :to => 'static#notfound'
 end
