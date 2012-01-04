@@ -27,6 +27,26 @@ a {
 }
 .clear { clear: both; } 
 
+.error {
+  @include defdiv;
+  position: absolute;
+  top: 25%;
+  left: 35%;
+  width: 300px;
+  .explanation {
+    h1 { 
+      font-size: 40px;
+      text-align: center;
+      color: #111;
+      margin: 5px;
+      text-shadow: 0 0 2px $accent;
+    }
+    p { 
+
+    }
+  }
+}
+
 body { 
   background: url('clutter.jpg');
   background-position: center middle;

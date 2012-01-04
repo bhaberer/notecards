@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   before_filter :auth_check 
 
   def index
-    @user = User.find_by_username(params[:username]) || raise("not found")
+    @user = User.find_by_username!(params[:username])
     @cards = Card.where(:user => User.find_by_username(params[:username]))
     
     respond_to do |format|
