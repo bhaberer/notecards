@@ -19,12 +19,12 @@
         %br.clear
       = f.submit 'Write Card', :class => 'submit'
 
-    - if @cards.present? 
-      .card
-        %h2 Whats happened on #{@month}/#{@day}
-        - @cards.each do |card|
-          .entry
-            .year= card.year
-            .text= card.entry
-            %br.clear
+  - if @cards.present? 
+    .card
+      %h2 Whats happened on #{@month}/#{@day}
+      - @cards.each do |card|
+        .entry
+          .year= card.year
+          .text= card.entry
           %br.clear
+        %br.clear
