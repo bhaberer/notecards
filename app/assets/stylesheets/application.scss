@@ -20,6 +20,7 @@ $accent: #2E1E3F;
 a { 
   color: $medium;
   text-decoration: none;
+  text-shadow: none;
   &:hover { 
     text-shadow: 0 0 1px $accent;
     text-decoration: underline;
@@ -51,7 +52,8 @@ body {
   background: url('clutter.jpg');
   background-position: center middle;
   font-family: helvetica;
-  color: $dark;
+  color: white;
+  text-shadow: 1px 1px 1px #2E1E3F;
   .notice {
     @include defdiv;
     margin: 0;
@@ -69,7 +71,7 @@ body {
       list-style: none; 
     } 
     @include defdiv;
-    position: absolute;
+    position: fixed;
     top: 80px;
     right: 10px;
     width: 150px;
@@ -91,8 +93,19 @@ body {
     width: 600px; 
     margin: 150px auto; 
   }
+  footer {
+    @include defdiv;
+    font-size: 12px;
+    position: fixed;
+    right: 0px;
+    padding: 5px 20px;
+    bottom: 0px;
+    border-radius: 3px 0 0 0;  
+    margin: 0;
+
+  }
 }
-.form { 
+.devise { 
   @include defdiv;
   width: 300px;
   margin: auto;
@@ -100,7 +113,10 @@ body {
   position: absolute;
   top: 200px;
   left: 30%;
-  
+}
+
+.form { 
+  width: 300px;
   .field { 
     border-radius: 2px;
     border: 1px solid $medium;
@@ -133,6 +149,7 @@ body {
       vertical-align: baseline;
       margin: -28px 4px;
       color: #888;
+      text-shadow: none;
     }
   }
   .active { 
@@ -166,6 +183,21 @@ body {
   &:hover {
     background-color: lighten($accent, 60%);
     box-shadow: 0 0 5px $accent;
+  }
+}
+
+.welcome { 
+  h1 { 
+    text-align: center; 
+    margin: 10px auto 15px
+  } 
+  p { 
+    width: 400px;
+    margin: 15px auto;
+  }
+  .form { 
+    margin: 20px auto;
+    height: 150px;
   }
 }
 
