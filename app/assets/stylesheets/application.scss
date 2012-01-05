@@ -28,6 +28,30 @@ a {
 }
 .clear { clear: both; } 
 
+#error_explanation {
+  ul { 
+    list-style: none;
+    text-align: right;
+    margin: 0;
+    li { 
+      @include defdiv;
+      position: absolute;
+      left: -1;
+      padding: 3px 10px; 
+      margin: 0;
+      color: white;
+      background-color: darkRed;
+      p { 
+        position: absolute;
+        right: -13px;
+        top: -20px;
+        color: darkRed;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
 .error {
   @include defdiv;
   position: absolute;
@@ -52,8 +76,8 @@ body {
   background: url('clutter.jpg');
   background-position: center middle;
   font-family: helvetica;
-  color: white;
-  text-shadow: 1px 1px 1px #2E1E3F;
+  color: $dark;
+  text-shadow: 0px 0px 0px white;
   .notice {
     @include defdiv;
     margin: 0;
@@ -91,7 +115,7 @@ body {
   .content {
     @include defdiv;
     width: 600px; 
-    margin: 150px auto; 
+    margin: 125px auto 30px; 
   }
   footer {
     @include defdiv;
@@ -107,8 +131,8 @@ body {
 }
 .devise { 
   @include defdiv;
-  width: 300px;
-  margin: auto;
+  width: 600px;
+  margin: 0;
   padding: 10px;
   position: absolute;
   top: 200px;
@@ -117,6 +141,8 @@ body {
 
 .form { 
   width: 300px;
+  margin: 0;
+  padding: 0;
   .field { 
     border-radius: 2px;
     border: 1px solid $medium;
@@ -135,7 +161,7 @@ body {
       width: 180px;
       height: 20px;
     }
-    span { 
+    label { 
       position: relative;
       top: 1px;
       left: 1px;
@@ -168,7 +194,10 @@ body {
   .submit { 
     width: 90px;
   }
-
+}
+.cancel { 
+  width: 400px;
+  float: left;
 }
 
 .submit { 
@@ -198,6 +227,10 @@ body {
   .form { 
     margin: 20px auto;
     height: 150px;
+  }
+  .signup { 
+    font-size: 30px;
+    text-align: center;
   }
 }
 
