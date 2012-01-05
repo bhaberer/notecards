@@ -10,6 +10,7 @@ class CardsController < ApplicationController
       format.html 
     end
   end
+  
 
   def month
     @cards = Card.where(:month => params[:month], 
@@ -30,6 +31,17 @@ class CardsController < ApplicationController
     end
   end
 
+  def new
+    @day = Time.zone.now.day
+    @month = Time.zone.now.month
+
+    @card = Card.new
+    @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
+
+    respond_to do |format|
+      format.html
+    end
+  end
 
   def create
     @card = Card.new(:entry => params[:card][:entry],

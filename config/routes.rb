@@ -16,7 +16,7 @@ Notecards::Application.routes.draw do
     match ':month/:day' => 'cards#day',   :as => :day,    :constraints => { :day => /\d{1,2}/, :month => /\d{1,2}/ }
   end
 
-  match 'home' => 'static#home'
+  match 'home' => 'cards#new'
 
   match ':username' => 'cards#index', :as => 'profile' 
 
