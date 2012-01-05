@@ -12,7 +12,7 @@ module DeviseHelper
         error
       end
     end
-    messages.join
+    messages = messages.join
     
     html = <<-HTML
     <div id="error_explanation">
