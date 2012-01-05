@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
 
+  def gravatar(size=48) 
+    "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}.png?s=#{size}&d=identicon"
+  end
+
   def to_param
     username
   end
