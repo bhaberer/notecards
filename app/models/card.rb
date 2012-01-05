@@ -6,6 +6,7 @@ class Card < ActiveRecord::Base
   validates_inclusion_of :month, :in => 1..12
   validates_format_of :year, :with => /^\d{4}$/
   validates_presence_of :entry
+  validates_presence_of :user
   validates_length_of :entry, :maximum => 365
 
 end
