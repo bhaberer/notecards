@@ -57,7 +57,7 @@ $(document).ready(function() {
 jQuery.ajaxSetup({ 
   'beforeSend': function(xhr) {
     xhr.setRequestHeader("Accept", "text/javascript");
-  };
+  }
 });
 
 function _ajax_request(url, data, callback, type, method) {
