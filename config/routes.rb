@@ -9,19 +9,19 @@ Notecards::Application.routes.draw do
     get 'resend', :to => "devise/confirmations#new"
   end
 
-
   scope ":username", :as => 'user' do 
     resources :cards
     match ':month' => 'cards#month',      :as => :month,  :constraints => { :month => /\d{1,2}/ }
     match ':month/:day' => 'cards#day',   :as => :day,    :constraints => { :day => /\d{1,2}/, :month => /\d{1,2}/ }
   end
 
-  match 'home' => 'cards#new'
+  match 'home' => 'cards#new', :as => 'home'
+  match 'home/yesterday' => 'cards#forgot', :as => 'yesterday'
 
   match ':username' => 'cards#index', :as => 'profile' 
 
   root :to => "static#index"
 
-  # Hack to allow custome 404 partial, since rails doesn't let me override RoutingError atm
+  # Hack to allow custom 404 partial, since rails doesn't let me override RoutingError atm
   match '*a', :to => 'static#notfound'
 end

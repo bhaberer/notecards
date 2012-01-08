@@ -32,8 +32,9 @@ class CardsController < ApplicationController
   end
 
   def new
-    @day = Time.zone.now.day
-    @month = Time.zone.now.month
+    @forgot = forgot_yesterday? 
+    @day = today
+    @month = today_month
 
     @card = Card.new
     @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
@@ -43,13 +44,37 @@ class CardsController < ApplicationController
     end
   end
 
-  def create
-    @card = Card.new(:entry => params[:card][:entry],
-                     :day => Time.zone.now.day,
-                     :month => Time.zone.now.month,
-                     :year => Time.zone.now.year,
-                     :user => current_user)
+  def forgot
+    @day = yesterday
+    @month = yesterday_month
 
+    @card = Card.new
+    @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
+
+    respond_to do |format|
+      if forgot_yesterday? 
+        format.html
+      else 
+        format.html { redirect_to home_path, 
+                      :notice => 'You already filled out yesterdays card!' }
+      end
+    end
+  end
+
+  def create
+    if params[:yesterday].present?
+      @card = Card.new(:entry => params[:card][:entry],
+                       :day => yesterday,
+                       :month => yesterday_month,
+                       :year => yesterday_year,
+                       :user_id => current_user)
+    else 
+      @card = Card.new(:entry => params[:card][:entry],
+                       :day => today,
+                       :month => today_month,
+                       :year => today_year,
+                       :user_id => current_user)
+    end
     respond_to do |format|
       if @card.save
         format.html { redirect_to root_path, :notice => 'Your card was written on successfully' }
@@ -60,6 +85,13 @@ class CardsController < ApplicationController
   end
 
   private 
+
+  def forgot_yesterday?
+    Card.where(:user_id => current_user,
+               :day => yesterday,
+               :month => yesterday_month,
+               :year => yesterday_year).count == 0
+  end
 
   def auth_check 
     user = User.find_by_username(params[:username])

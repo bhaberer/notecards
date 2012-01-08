@@ -1,0 +1,28 @@
+.content 
+  = form_for @card, :url => user_cards_path(current_user.username) do |f|
+    .card
+      %h2 Whats happening on #{@month}/#{@day}
+      .entry 
+        .year= Time.zone.now.year
+        .text
+          - if @card.errors.any?
+            #error_explanation
+              %h2= "#{pluralize(@card.errors.count, "error")} prohibited this card from being saved:"
+              %ul
+                - @card.errors.full_messages.each do |msg|
+                  %li= msg
+          = hidden_field_tag  :yesterday, 'true'
+          = f.text_area :entry, :rows => '5', :cols => 45
+        %br.clear
+      %br.clear
+    = f.submit 'Write Card', :class => 'submit'
+
+  - if @cards.present? 
+    .card
+      %h2 What's happened on #{@month}/#{@day}
+      - @cards.each do |card|
+        .entry
+          .year= card.year
+          .text= card.entry
+          %br.clear
+        %br.clear

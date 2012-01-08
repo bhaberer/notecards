@@ -20,4 +20,27 @@ class ApplicationController < ActionController::Base
     Time.zone = current_user.time_zone if user_signed_in? && current_user.time_zone.present?
   end
 
+  def today 
+    Time.zone.now.day
+  end
+  
+  def today_month
+    Time.zone.now.month
+  end
+
+  def today_year
+    Time.zone.now.year
+  end
+
+  def yesterday 
+    Time.zone.now.yesterday.day
+  end
+  
+  def yesterday_month
+    Time.zone.now.yesterday.month
+  end
+
+  def yesterday_year
+    Time.zone.now.yesterday.year
+  end
 end
