@@ -1,0 +1,13 @@
+console.log('foo1');
+
+if (<%= resource.valid? %>) { 
+  $('#devise_registration').slideUp();
+} else {
+  $('#devise_registration').slideUp();
+  $('#devise_registration .form').replaceWith("<%= escape_javascript(render :partial => 'form') %>");
+  $('#devise_registration').slideDown(function() { 
+    moveErrors();
+    deviseAjax();
+  });
+}
+ajaxLinks();

@@ -34,9 +34,9 @@ a {
     text-align: right;
     margin: 0;
     li { 
+      display: none;
       @include defdiv;
       position: absolute;
-      left: -1;
       padding: 3px 10px; 
       margin: 0;
       color: white;
@@ -132,7 +132,7 @@ body {
 }
 .devise { 
   @include defdiv;
-  width: 600px;
+  width: 300px;
   margin: 0;
   padding: 10px;
   position: absolute;
