@@ -17,7 +17,7 @@ $accent: #2E1E3F;
 .card { 
   background-image: url("notebg.jpg");
   width: 450px;
-  padding: 0 15px 20px;
+  padding: 0 15px 20px 0 ;
   margin: 20px auto;
   box-shadow: 0 0 5px $accent;
   border: 1px solid black;
@@ -32,11 +32,16 @@ $accent: #2E1E3F;
     margin: 0;
   }
   .entry { 
-    width: 300px;
+    width: 450px;
     line-height: 23px;
     .year { 
+      text-align: center;
       width: 50px;
       float: left;
+    }
+    .dow {
+      font-size: 10px;
+      text-align: center;
     }
     .text { 
       width: 400px;

@@ -90,16 +90,66 @@ body {
     border-radius: 0 0 3px 3px ;
   }
   nav { 
-    ul { 
-      margin: 0;
-      padding: 0;
-      list-style: none; 
-    } 
     @include defdiv;
+    border-radius: 0 0 0 3px;
     position: fixed;
-    top: 80px;
-    right: 10px;
-    width: 150px;
+    top: 0px;
+    right: 0px;
+    padding: 3px 10px;
+    width: 300px;
+    float: right;
+    margin: 0;
+    .user {
+      .image { 
+        @include defdiv;
+        height: 48px;
+        width: 48px;
+        margin: 0;
+        padding: 0;
+        float: left;
+        background-size: 48px 48px;
+      }
+      .info { 
+        float: left;
+        width: 200px;
+        padding: 5px 5px 5px 15px;
+      }
+      .links {
+        margin: 10px 0 5px;
+        float: left;
+        ul { 
+          margin: 0;
+          padding: 0;
+          list-style: none; 
+          li { 
+            display: inline;
+            float: left;
+            width: 95px;
+            text-align: center;
+            font-size: 14px;
+            background-color: white;
+            padding: 3px 0;
+            border: 1px solid black;
+            border-radius: 3px;
+            margin: 0 1px;
+            &:hover {
+              background-color: lighten($accent, 60%);
+              box-shadow: 0 0 5px $accent;
+            }
+            a { 
+              color: black;
+              width: 100%;
+              height: 100%;
+              float: left;
+              &:hover {
+                text-shadow: none;
+                text-decoration: none;
+              }
+            }
+          }
+        } 
+      }
+    }
   }
   header {
     @include defdiv;
@@ -111,7 +161,7 @@ body {
     padding: 15px 50px;
     font-size: 43px;
     line-height: 51px;
-    text-shadow: 0 0 2px black;
+    text-shadow: 0 0 1px black;
   }
   .content {
     @include defdiv;
@@ -215,6 +265,7 @@ body {
     box-shadow: 0 0 5px $accent;
   }
 }
+
 
 .welcome { 
   h1 { 

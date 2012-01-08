@@ -22,6 +22,8 @@ class CardsController < ApplicationController
   end
 
   def day
+    @day = params[:day]
+    @month = params[:month]
     @cards = Card.where(:month => params[:month], 
                         :day => params[:day], 
                         :user_id => User.find_by_username(params[:username]))

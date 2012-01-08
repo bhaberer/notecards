@@ -52,6 +52,21 @@ $(document).ready(function() {
   deviseAjax();
 });
 
+$('body').click(function() {
+  if($("#signin_form").is(':visible')) {
+    $("#signin_form").slideUp();
+    $('#signin_link').show();
+  };
+});
+
+$(document).ready(function() {
+  $('#signin').live('click', function(e) {
+    $('#signin_link').hide();
+    $('#signin_form').slideDown();
+  });
+});
+  
+
 // Bunch of generic ajax helpers
 
 jQuery.ajaxSetup({ 

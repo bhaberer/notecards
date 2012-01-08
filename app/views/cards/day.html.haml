@@ -1,10 +1,2 @@
 .content 
-  .card 
-    %h2 What happened on #{params[:month]}/#{params[:day]}
-    - @cards.each do |card|
-      .entry 
-        .year= card.year
-        .text= card.entry
-        %br.clear
-      %br.clear
-
+  = render :partial => 'card'

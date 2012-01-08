@@ -1,0 +1,10 @@
+.card 
+  %h2 What happened on #{@month}/#{@day}
+  - @cards.each do |card|
+    .entry 
+      .year
+        = card.year
+        .dow= Time.local(card.year, card.month, card.day).strftime("%A")
+      .text= card.entry
+      %br.clear
+    %br.clear
