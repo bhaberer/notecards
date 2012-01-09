@@ -40,6 +40,11 @@ function moveErrors() {
     $(this).css('left', - $(this).width() - 15);
     $(this).fadeIn();
   });
+  $(document).find('#settings #error_explanation li').each(function(index) {
+    $(this).css('top', $('#' + $(this).attr('for')).position().top);
+    $(this).css('left', - $(this).width() - 15);
+    $(this).fadeIn();
+  });
   $(document).find('li[for="card_entry"]').each(function(index) {
     $(this).css('top', $('#' + $(this).attr('for')).position().top);
     $(this).css('left', $(this).position().left - 130);

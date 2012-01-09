@@ -5,7 +5,7 @@ Notecards::Application.routes.draw do
     get 'forgot', :to => "devise/passwords#new"
     get 'logout', :to => "devise/sessions#destroy"
     get 'signup', :to => "devise/registrations#new"
-    get 'profile', :to => "devise/registrations#edit"
+    get 'settings', :to => "devise/registrations#edit"
     get 'resend', :to => "devise/confirmations#new"
   end
 

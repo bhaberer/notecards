@@ -189,7 +189,22 @@ body {
   top: 200px;
   left: 30%;
 }
-
+#settings { 
+  form { 
+    .field {
+      select { 
+        border: none;
+        width: 290px;
+        font-size: 12px;
+        padding: 3px 0;
+      }
+      background-color: white;
+      width: 295px;
+      input { width: 285px; } 
+    }
+  }
+}
+      
 .form { 
   width: 300px;
   margin: 0;

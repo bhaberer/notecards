@@ -1,21 +1,27 @@
-.content
-  .form
+.devise
+  #settings.form
     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
       = devise_error_messages!
-
-      .field 
-        = f.email_field :email
-        %span Email Address 
       .field 
         = f.password_field :password
-        %span New Password
+        = f.label :password, 'New Password'
       .field 
         = f.password_field :password_confirmation
-        %span Confirm New Password
+        = f.label :password_confirmation, 'Confirm New Password'
+      .field
+        = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+        = f.label :time_zone
+      If you want, we can send you a nightly reminder to post. 
+      .checkbox 
+        = f.check_box :email_reminder
+        = f.label :email_reminder, "send me an email to remind me."
+
+      We need your current password, if you're making any changes. 
       .field 
         = f.password_field :current_password
-        %span Current Password
+        = f.label :current_password, 'Current Password'
       = f.submit "Update", :class => 'submit'
+
   .cancel
     %h3 Cancel my account
 
