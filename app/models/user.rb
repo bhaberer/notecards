@@ -19,4 +19,9 @@ class User < ActiveRecord::Base
   def to_param
     username
   end
+
+  def has_done_todays_card? 
+    Card.where(:user_id => self, :day => Time.zone.now.day, :month => Time.zone.now.month, :year => Time.zone.now.year).present?
+  end
+
 end

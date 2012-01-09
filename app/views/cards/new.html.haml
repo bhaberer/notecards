@@ -4,7 +4,7 @@
     %br
     You can still fill it out if you 
     = link_to 'Click Here', yesterday_path
-  - if entry_today? 
+  - if current_user.has_done_todays_card? 
     %h2 You wrote on today's notecard.
     Come back tomorrow!
   - else 
