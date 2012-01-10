@@ -46,8 +46,8 @@ function moveErrors() {
     $(this).fadeIn();
   });
   $(document).find('li[for="card_entry"]').each(function(index) {
-    $(this).css('top', $('#' + $(this).attr('for')).position().top);
-    $(this).css('left', $(this).position().left - 130);
+    $(this).css('top', $('#' + $(this).attr('for')).position().top + 10);
+    $(this).css('left', 50 - $(this).width());
     $(this).fadeIn();
   });
 };

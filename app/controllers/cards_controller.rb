@@ -69,13 +69,13 @@ class CardsController < ApplicationController
                        :day => yesterday,
                        :month => yesterday_month,
                        :year => yesterday_year,
-                       :user_id => current_user)
+                       :user => current_user)
     else 
       @card = Card.new(:entry => params[:card][:entry],
                        :day => today,
                        :month => today_month,
                        :year => today_year,
-                       :user_id => current_user)
+                       :user => current_user)
     end
     respond_to do |format|
       if @card.save

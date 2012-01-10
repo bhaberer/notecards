@@ -165,6 +165,9 @@ body {
   }
   .content {
     @include defdiv;
+    position: absolute;
+    top: 90px;
+    left: 25%;
     width: 600px; 
     margin: 125px auto 30px; 
   }

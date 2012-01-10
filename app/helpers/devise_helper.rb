@@ -8,7 +8,7 @@ module DeviseHelper
       content_tag :li, :id => "#{class_name}_#{attr}_error",
                        :for => "#{class_name}_#{attr}" do 
         simple_format('&#9654;') +
-        attr.to_s.capitalize + ' ' +  
+        attr.to_s.humanize + ' ' +  
         error
       end
     end
