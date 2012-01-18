@@ -71,6 +71,7 @@ class CardsController < ApplicationController
                        :year => yesterday_year,
                        :user => current_user)
     else 
+
       @card = Card.new(:entry => params[:card][:entry],
                        :day => today,
                        :month => today_month,
@@ -79,9 +80,19 @@ class CardsController < ApplicationController
     end
     respond_to do |format|
       if @card.save
-        format.html { redirect_to root_path, :notice => 'Your card was written on successfully' }
+        format.html { redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.' }
+        format.js { render :layout => false } 
       else
+        if params[:yesterday].present?
+          @day = yesterday
+          @month = yesterday_month
+        else 
+          @day = today
+          @month = today_month
+        end
+
         format.html { render :action => "new" }
+        format.js { render :layout => false } 
       end
     end
   end
