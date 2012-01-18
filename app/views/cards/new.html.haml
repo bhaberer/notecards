@@ -8,23 +8,6 @@
     %h2 You wrote on today's notecard.
     Come back tomorrow!
   - else 
-    = form_for @card, :url => user_cards_path(current_user.username) do |f|
-      - if @card.errors.any?
-        #error_explanation
-          %ul
-            - @card.errors.full_messages.each do |msg|
-              %li{:for => 'card_entry'} 
-                = msg
-                %p &#9654;
-      .card
-        %h2 Whats happening on #{@month}/#{@day}
-        .entry 
-          .year= Time.zone.now.year
-          .text
-            = f.text_area :entry, :rows => '5', :cols => 45
-          %br.clear
-        %br.clear
-      = f.submit 'Write Card', :class => 'submit'
-
+    = render 'form'
   - if @cards.present? 
     = render :partial => 'card'
