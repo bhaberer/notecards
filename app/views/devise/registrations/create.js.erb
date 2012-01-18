@@ -1,5 +1,6 @@
 if (<%= resource.valid? %>) { 
   $('#devise_registration').slideUp();
+  window.location.reload();
 } else {
   $('#devise_registration').slideUp();
   $('#devise_registration .form').replaceWith("<%= escape_javascript(render :partial => 'form') %>");
