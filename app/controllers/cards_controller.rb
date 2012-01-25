@@ -1,16 +1,12 @@
 class CardsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index]
+  before_filter :authenticate_user!, :except => [:index, :mailin]
   before_filter :auth_check 
 
-  def index
-    @user = User.find_by_username!(params[:username])
-    @cards = Card.where(:user => User.find_by_username(params[:username]))
-    
+  def mailin 
     respond_to do |format|
-      format.html 
+      format.html { render :layout => false } 
     end
   end
-  
 
   def month
     @cards = Card.where(:month => params[:month], 
@@ -28,6 +24,15 @@ class CardsController < ApplicationController
                         :day => params[:day], 
                         :user_id => User.find_by_username(params[:username]))
 
+    respond_to do |format|
+      format.html 
+    end
+  end
+  
+  def index
+    @user = User.find_by_username!(params[:username])
+    @cards = Card.where(:user => User.find_by_username(params[:username]))
+    
     respond_to do |format|
       format.html 
     end

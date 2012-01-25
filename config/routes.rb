@@ -9,6 +9,8 @@ Notecards::Application.routes.draw do
     get 'resend', :to => "devise/confirmations#new"
   end
 
+  match 'mailin' => 'cards#mailin', :via => :post
+
   scope ":username", :as => 'user' do 
     resources :cards
     match ':month' => 'cards#month',      :as => :month,  :constraints => { :month => /\d{1,2}/ }
