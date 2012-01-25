@@ -80,9 +80,11 @@ class CardsController < ApplicationController
     end
     respond_to do |format|
       if @card.save
+        @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
         format.html { redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.' }
         format.js { render :layout => false } 
       else
+        @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
         if params[:yesterday].present?
           @day = yesterday
           @month = yesterday_month
