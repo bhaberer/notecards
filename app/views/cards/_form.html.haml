@@ -1,6 +1,6 @@
 = form_for @card, 
            :url => user_cards_path(current_user.username),
-           :html => { :class => 'ajaxForm' } do |f|
+           :html => { :remote => true } do |f|
   - if @card.errors.any?
     #error_explanation
       %ul
