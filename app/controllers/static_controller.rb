@@ -1,21 +1,12 @@
 class StaticController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :notfound]
-
   def index 
-    respond_to do |format|
-      if user_signed_in? 
-        format.html { redirect_to home_path }
-      else 
-        format.html 
-      end
-    end
+    if user_signed_in? 
+      redirect_to home_path
+    end 
   end 
 
   def notfound
-    respond_to do |format|
-      format.html
-    end
   end
 
 end
