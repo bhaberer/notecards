@@ -19,8 +19,24 @@ class User < ActiveRecord::Base
     username
   end
 
+  def cards_for_month(month)
+    self.cards.where(:month => month)
+  end
+
+  def cards_for_day(month, day)
+    self.cards.where(:month => month, :day => day)
+  end
+
+  def last_entries
+    self.cards.limit(10) 
+  end
+
   def has_done_todays_card? 
-    Card.where(:user_id => self, :day => Time.zone.now.day, :month => Time.zone.now.month, :year => Time.zone.now.year).present?
+    self.cards.card_for_date(Time.zone.now).first.present?
+  end
+  
+  def has_done_yesterdays_card? 
+    self.cards.card_for_date(Time.zone.now - 1.day).first.present?
   end
 
 end

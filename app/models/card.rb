@@ -9,4 +9,9 @@ class Card < ActiveRecord::Base
   validates_presence_of :user
   validates_length_of :entry, :maximum => 365
 
+  def self.card_for_date(time) 
+    where(:day => time.day, :month => time.month, :year => time.year)
+  end
+
+
 end

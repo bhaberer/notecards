@@ -1,54 +1,34 @@
 class CardsController < ApplicationController
+
   before_filter :authenticate_user!, :except => [:index, :mailin]
   before_filter :auth_check 
 
   def mailin 
-    respond_to do |format|
-      format.html { render :layout => false } 
-    end
   end
 
   def month
-    @cards = Card.where(:month => params[:month], 
-                        :user_id => User.find_by_username(params[:username]))
-
-    respond_to do |format|
-      format.html
-    end
+    @user = User.find_by_username(params[:username])
+    @cards = @user.cards_for_month(params[:month]) 
   end
 
   def day
     @day = params[:day]
     @month = params[:month]
-    @cards = Card.where(:month => params[:month], 
-                        :day => params[:day], 
-                        :user_id => User.find_by_username(params[:username]))
-
-    respond_to do |format|
-      format.html 
-    end
+    @user = User.find_by_username(params[:username])
+    @cards = @user.cards_for_day(params[:month], params[:day]) 
   end
   
   def index
     @user = User.find_by_username!(params[:username])
-    @cards = Card.where(:user => User.find_by_username(params[:username]))
-    
-    respond_to do |format|
-      format.html 
-    end
+    @cards = @user.last_entries
   end
 
   def new
-    @forgot = forgot_yesterday? 
     @day = today
     @month = today_month
 
     @card = Card.new
-    @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
-
-    respond_to do |format|
-      format.html
-    end
+    @cards = current_user.cards_for_day(@month, @day)
   end
 
   def forgot
@@ -56,62 +36,37 @@ class CardsController < ApplicationController
     @month = yesterday_month
 
     @card = Card.new
-    @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
+    @cards = current_user.cards_for_day(@month, @day) 
 
-    respond_to do |format|
-      if forgot_yesterday? 
-        format.html
-      else 
-        format.html { redirect_to home_path, 
-                      :notice => 'You already filled out yesterdays card!' }
-      end
+    if current_user.has_done_yesterdays_card? 
+      redirect_to home_path, :notice => 'You already filled out yesterdays card!'
     end
   end
 
   def create
+    @card = Card.new(:entry => params[:card][:entry], :user => current_user)
+
     if params[:yesterday].present?
-      @card = Card.new(:entry => params[:card][:entry],
-                       :day => yesterday,
-                       :month => yesterday_month,
-                       :year => yesterday_year,
-                       :user => current_user)
+      @card.day   = yesterday
+      @card.month = yesterday_month
+      @card.year  = yesterday_year
     else 
+      @card.day   = today
+      @card.month = today_month
+      @card.year  = today_year
+    end 
 
-      @card = Card.new(:entry => params[:card][:entry],
-                       :day => today,
-                       :month => today_month,
-                       :year => today_year,
-                       :user => current_user)
+    if @card.save
+       redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.'
+    else
+      @day = @card.day
+      @month = @card.month
+      render :action => "new"
     end
-    respond_to do |format|
-      if @card.save
-        @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
-        format.html { redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.' }
-        format.js { render :layout => false } 
-      else
-        @cards = Card.where(:month => @month, :day => @day, :user_id => current_user)
-        if params[:yesterday].present?
-          @day = yesterday
-          @month = yesterday_month
-        else 
-          @day = today
-          @month = today_month
-        end
-
-        format.html { render :action => "new" }
-        format.js { render :layout => false } 
-      end
-    end
+    @cards = current_user.cards_for_day(@month, @day)
   end
 
   private 
-
-  def forgot_yesterday?
-    Card.where(:user_id => current_user,
-               :day => yesterday,
-               :month => yesterday_month,
-               :year => yesterday_year).count == 0
-  end
 
   def auth_check 
     user = User.find_by_username(params[:username])

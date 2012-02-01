@@ -1,5 +1,5 @@
 .content 
-  - if @forgot
+  - unless current_user.has_done_yesterdays_card?
     .forget 
       You didn't fill out your card yesterday!
       %br
@@ -11,6 +11,6 @@
       Come back tomorrow!
     - else 
       = render 'form'
-  #card 
+  #card
     - if @cards.present? 
       = render :partial => 'card'

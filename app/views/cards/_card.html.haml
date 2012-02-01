@@ -4,7 +4,7 @@
     .entry 
       .year
         = card.year
-        .dow= Time.local(card.year, card.month, card.day).strftime("%A")
+        .dow= day_of_the_week_for(card) 
       .text= card.entry
       %br.clear
     %br.clear

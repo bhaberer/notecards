@@ -1,11 +1,3 @@
 .content 
   = render 'form'
-  - if @cards.present? 
-    .card
-      %h2 What's happened on #{@month}/#{@day}
-      - @cards.each do |card|
-        .entry
-          .year= card.year
-          .text= card.entry
-          %br.clear
-        %br.clear
+  = render @cards 
