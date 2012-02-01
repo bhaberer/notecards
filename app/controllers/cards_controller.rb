@@ -57,13 +57,15 @@ class CardsController < ApplicationController
     end 
 
     if @card.save
-       redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.'
+      @cards = current_user.cards_for_day(@month, @day) 
+      redirect_to root_path, :notice => 'Thanks for updating, come back tomorrow.' 
     else
+      @cards = current_user.cards_for_day(@month, @day) 
       @day = @card.day
       @month = @card.month
       render :action => "new"
     end
-    @cards = current_user.cards_for_day(@month, @day)
+
   end
 
   private 

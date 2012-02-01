@@ -2,8 +2,7 @@
   = form_for(resource, 
              :as => resource_name, 
              :url => registration_path(resource_name),
-             :html => { :novalidate => "novalidate",
-                        :class => 'ajaxForm' } ) do |f| 
+             :html => { :novalidate => "novalidate" } ) do |f| 
     = devise_error_messages!
     .field
       = f.text_field :username
