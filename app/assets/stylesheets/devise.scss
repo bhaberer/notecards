@@ -1,0 +1,21 @@
+@import 'mixins';
+
+.devise { 
+  @include defdiv;
+  width: 300px;
+  margin: 0;
+  padding: 10px;
+  position: absolute;
+  top: 200px;
+  left: 30%;
+}
+#signin_form { 
+  .formError { 
+    display: none;
+    background-color: darkRed;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+    text-align: center;
+  }
+}

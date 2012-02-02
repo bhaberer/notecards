@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-
+  respond_to :js
   before_filter :authenticate_user!, :except => [:index, :mailin]
   before_filter :auth_check 
 

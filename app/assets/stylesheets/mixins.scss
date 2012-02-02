@@ -1,0 +1,13 @@
+$light: #ADAAB0;
+$medium: #5E5C60;
+$dark: #333333;
+$accent: #2E1E3F;
+
+@mixin defdiv { 
+  background: $light;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px $accent;
+  border-radius: 3px;
+  opacity: .95;
+}
