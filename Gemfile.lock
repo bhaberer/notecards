@@ -213,6 +213,7 @@ DEPENDENCIES
   rails (= 3.1.11)
   rspec
   rspec-rails (~> 2.6)
+  sass
   sass-rails (~> 3.1.5)
   simplecov
   turn (= 0.8.2)
