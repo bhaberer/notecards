@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise  :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
-          :validatable, :reconfirmable
+          :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :email_reminder
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username,
+                  :email_reminder
 
   validates_presence_of :username
 
@@ -39,5 +40,4 @@ class User < ActiveRecord::Base
   def has_done_yesterdays_card?
     self.cards.card_for_date(Time.zone.now - 1.day).first.present?
   end
-
 end

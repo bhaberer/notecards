@@ -1,5 +1,4 @@
 !!!
-!!!
 %html{:xmlns => 'http://www.w3.org/1999/xhtml'}
   %head
     %title Notecards
@@ -7,33 +6,32 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    %header 365Cards
-    - if notice || alert
-      .notice
-        = notice
-        = alert
-    - unless params[:controller] == 'devise/sessions' || params[:controller] == 'devise/registrations'
-      %nav{:id => user_signed_in? ? 'user' : 'signin'} 
-        - if user_signed_in? 
-          .user
-            .image{ :style => "background-image: url(#{current_user.gravatar});" }
-            .info
-              Signed in as #{current_user.username}.
-              %br 
-              Not you? #{link_to "Sign out", logout_path}
-            .links 
-              %ul
+    %header
+      .navbar.navbar-inverse.navbar-fixed-top
+        .navbar-inner
+          .container
+            = link_to 'Notecards', :root, :class => 'brand'
+            %ul.nav
+              - if user_signed_in?
                 %li= link_to "Today's Card", home_path
                 %li= link_to "Profile", profile_path(current_user.username)
                 %li= link_to "Settings", settings_path
-        - else
-          #signin_form{ :style => 'display: none;' } 
-            = render :partial => 'devise/sessions/form'
-          #signin_link Click here to login
-          %noscript= link_to "Sign in", login_path
+            %ul.nav.pull-right
+              %li
+                - if user_signed_in?
+                  .pull-left{ :style => "background-image: url(#{current_user.gravatar});" }
+                  = link_to 'Log out', destroy_user_session_path, :method => 'delete'
+                - else
+                  = link_to 'Log In', new_user_session_path
 
-    #main= yield
+    .container.main{:id => [params[:controller], '_', params[:action]].join }
+      - flash.each do |name, msg|
+        - if msg.is_a?(String)
+          %div{ :class => "alert alert-#{ name == :notice ? "success" : "error" }" }
+            %a.close{ "data-dismiss" => "alert" } &#215;
+            = content_tag :div, msg, :id => "flash_#{name}"
+      = yield
     %footer
-      Created by &nbsp; 
+      Created by &nbsp;
       = link_to 'Brian Haberer', 'https://github.com/bhaberer', :target => '_blank'
-      
+
