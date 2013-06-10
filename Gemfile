@@ -5,7 +5,7 @@ gem 'aws-s3',       '~> 0.6.3'
 gem 'paperclip',    '~> 2.4.5'
 gem 'haml',         '~> 4.0.3'
 gem 'haml-rails',   '~> 0.4.0'
-gem 'sass',         '~> 3.2.9
+gem 'sass',         '~> 3.2.9'
 gem 'devise',       '~> 2.2.4'
 gem 'json',         '~> 1.7.7'
 gem 'psych'
