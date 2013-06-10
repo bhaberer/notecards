@@ -42,4 +42,7 @@ Notecards::Application.configure do
 
   # Devise needs a default URL for its mails
   config.action_mailer.default_url_options = { :host => '192.168.1.69' }
+
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
 end
