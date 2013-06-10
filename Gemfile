@@ -1,15 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
-gem 'aws-s3', '0.6.2'
-gem 'paperclip', '~> 2.4.5'
-gem 'haml', '3.1.4'
-gem 'haml-rails', '~> 0.3.4'
-gem 'sass'
-gem 'devise', '~> 1.4.7'
-gem 'pg'
+gem 'rails',        '~> 3.2.13'
+gem 'aws-s3',       '~> 0.6.3'
+gem 'paperclip',    '~> 2.4.5'
+gem 'haml',         '~> 4.0.3'
+gem 'haml-rails',   '~> 0.4.0'
+gem 'sass',         '~> 3.2.9
+gem 'devise',       '~> 2.2.4'
+gem 'json',         '~> 1.7.7'
 gem 'psych'
-gem 'json', '~> 1.7.7'
+gem 'pg',           '~> 0.15.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
