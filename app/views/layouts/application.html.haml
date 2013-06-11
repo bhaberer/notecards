@@ -13,14 +13,25 @@
             = link_to 'Notecards', :root, :class => 'brand'
             %ul.nav
               - if user_signed_in?
-                %li= link_to "Today's Card", home_path
-                %li= link_to "Profile", profile_path(current_user.username)
-                %li= link_to "Settings", settings_path
+                %li{ :class => current_page?(home_path) ? 'active' : '' }
+                  = link_to home_path do
+                    %i.icon-white.icon-calendar
+                    Today's Card
+                %li{ :class => current_page?(profile_path(current_user.username)) ? 'active' : '' }
+                  = link_to profile_path(current_user.username) do
+                    %i.icon-white.icon-briefcase
+                    Cardbox
+                %li{ :class => current_page?(settings_path) ? 'active' : '' }
+                  = link_to settings_path do
+                    %i.icon-white.icon-cog
+                    Settings
             %ul.nav.pull-right
               %li
                 - if user_signed_in?
                   .pull-left{ :style => "background-image: url(#{current_user.gravatar});" }
-                  = link_to 'Log out', destroy_user_session_path, :method => 'delete'
+                  = link_to destroy_user_session_path, :method => 'delete' do
+                    %i.icon-white.icon-off
+                    Log out
                 - else
                   = link_to 'Log In', new_user_session_path
 

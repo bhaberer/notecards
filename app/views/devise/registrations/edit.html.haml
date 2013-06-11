@@ -1,30 +1,35 @@
-.devise
-  #settings.form
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-      = devise_error_messages!
-      .field 
-        = f.password_field :password
-        = f.label :password, 'New Password'
-      .field 
-        = f.password_field :password_confirmation
-        = f.label :password_confirmation, 'Confirm New Password'
-      .field
-        = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
-        = f.label :time_zone
-      If you want, we can send you a nightly reminder to post. 
-      .checkbox 
-        = f.check_box :email_reminder
-        = f.label :email_reminder, "send me an email to remind me."
-
-      We need your current password, if you're making any changes. 
-      .field 
-        = f.password_field :current_password
-        = f.label :current_password, 'Current Password'
-      = f.submit "Update", :class => 'submit'
+.signup.span6.offset3
+  = form_for( resource,
+              :builder => BootstrapFormBuilder,
+              :as => resource_name,
+              :url => registration_path(resource_name),
+              :html => { :method => :put, :class => 'form-horizontal' }) do |f|
+    = f.password_field :password
+    = f.password_field :password_confirmation
+    = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+    %p
+      %strong If you want, we can send you a nightly reminder to post.
+    .control-group
+      .controls
+        = f.label :email_reminder do
+          = f.check_box :email_reminder
+          Send me an email to remind me.
+    %p
+      %strong We need your current password, if you're making any changes.
+    .field
+      = f.password_field :current_password, :placeholder => 'Current Password'
+    .control-group
+      .controls
+        = f.submit "Update"
 
   .cancel
     %h3 Cancel my account
 
-    %p Unhappy? #{ link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}
+    %p
+      = link_to "Cancel my account",
+                registration_path(resource_name),
+                :confirm => "Are you sure? Once you do this, there is no going back!",
+                :class => 'btn btn-danger',
+                :method => :delete
   %br.clear
 

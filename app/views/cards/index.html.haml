@@ -1,6 +1,6 @@
-.content 
+.content
   %ul
-    - current_user.cards.each do |card| 
-      %li 
+    - current_user.cards.each do |card|
+      %li
         #{link_to card.month, user_month_path(current_user, card.month)}/#{link_to card.day, user_day_path(current_user, card.month, card.day)}/#{card.year} -
-        = card.entry   
+        = card.entry

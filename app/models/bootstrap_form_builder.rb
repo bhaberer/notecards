@@ -2,7 +2,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   delegate :capture, :content_tag, :tag, to: :@template
 
-  %w[text_field text_area password_field collection_select email_field].each do |method_name|
+  %w[text_field text_area password_field collection_select time_zone_select email_field].each do |method_name|
     define_method(method_name) do |name, *args|
       errors = object.errors[name].any?? " error" : ""
       error_msg = object.errors[name].any?? content_tag(:span, object.errors[name].join(","), class: "help-inline") : ""
