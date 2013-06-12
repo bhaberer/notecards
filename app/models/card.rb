@@ -24,14 +24,17 @@ class Card < ActiveRecord::Base
     :oncology         => 'Oncology'
   }
 
-  validates :time_in, :presence => true
+  validates :time_in, :presence => true,
+                      :allow_nil => true
 
-  validates :time_out, :presence => true
+  validates :time_out, :presence => true,
+                       :allow_nil => true
 
-  validates :notes_duration, :presence => true
+  validates :notes_duration, :presence => true,
+                             :allow_nil => true
 
-  validates :rotation, :presence => true,
-                       :inclusion => { :in => SHIFTS.keys.map(&:to_s) }
+  validates :rotation, :inclusion => { :in => SHIFTS.keys.map(&:to_s) },
+                       :allow_nil => true
 
   validates :user_id, :uniqueness => { :scope => [:day, :month, :year],
                                        :message => 'already has an entry for that day' }
@@ -101,7 +104,9 @@ class Card < ActiveRecord::Base
   private
 
   def times_are_parsed
+    return true unless self.user.vet?
     [:time_out, :time_in].each do |time|
+      return if read_attribute(time).nil?
       unless Time.parse(read_attribute(time).to_s)
         errors.add(method, "was not a valid time")
       end
