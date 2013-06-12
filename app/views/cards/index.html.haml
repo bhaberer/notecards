@@ -1,6 +1,16 @@
 .content
-  %ul
-    - current_user.cards.each do |card|
-      %li
-        #{link_to card.month, user_month_path(current_user, card.month)}/#{link_to card.day, user_day_path(current_user, card.month, card.day)}/#{card.year} -
-        = card.entry
+  .row
+    .span3
+      %ul#cardbox_nav.nav.nav-list{ 'data-spy' => 'affix', 'data-offset-top' => 0 }
+        - Date::MONTHNAMES[1..12].each do |month|
+          %li
+            = link_to "##{month.downcase}" do
+              = month
+              %i.icon-chevron-right
+    .span9#cardbox_months
+      - Date::MONTHNAMES[1..12].each do |month|
+        .month{ :id => month.downcase }
+          %h1= month
+
+:javascript
+  $('body').scrollspy();

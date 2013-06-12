@@ -11,91 +11,75 @@ $dark: #333333;
 $accent: #2E1E3F;
 
 @mixin defdiv {
-  background: $light;
-  box-shadow: 0 0 10px $accent;
+  background: white;
+  box-shadow: 0 0 5px $accent;
   border-radius: 3px;
-  opacity: .95;
+  opacity: .98;
 }
+
 input[type="checkbox"] {
   margin-top: 1px;
 }
+
 .form-actions {
   background-color: transparent;
   padding: 0;
   border: none;
 }
 
-.card {
-  background-image: url("notebg.jpg");
-  width: 450px;
-  padding: 0 15px 20px 0 ;
-  margin: 20px auto;
-  box-shadow: 0 0 5px $accent;
-  border: 1px solid black;
-  text-shadow: none;
-  color: #222;
-  br { line-height: 23px; }
+.new_card {
+  @include defdiv;
+  padding: 10px;
+}
 
-  h2 {
-    font-size: 24px;
-    font-weight: normal;
-    font-family: courier;
-    margin: 0;
-  }
-  .entry {
-    width: 450px;
-    line-height: 23px;
-    .year {
-      text-align: center;
-      width: 50px;
-      float: left;
-    }
-    .dow {
-      font-size: 10px;
-      text-align: center;
-    }
-    .text {
-      width: 400px;
-      float: left;
-      textarea {
-        outline: none;
-        margin: 0;
-        line-height: 23px;
-        background: none;
-        border: 0;
+#cards_index {
+  .nav {
+    @include defdiv;
+    li {
+      &:first-child a {
+        border-radius: 3px 3px 0 0;
+      }
+      &:last-child a {
+        border-radius: 0 0 3px 3px;
+      }
+      a {
+        border: 1px solid #e5e5e5;
+        padding: 4px 10px;
+        margin-bottom: -1px;
+        width: 180px;
+      }
+      .icon-chevron-right {
+        float: right;
       }
     }
+  }
+  .month {
+    @include defdiv;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+}
+
+#cards_new {
+  .card {
+    @include defdiv;
+    padding: 10px;
   }
 }
 
 
 body {
   background: url('clutter.jpg');
-  background-position: center middle;
-  font-family: helvetica;
-  color: $dark;
-  text-shadow: 0px 0px 0px white;
+  background-position: center center;
+  background-attachment:fixed;
   .main {
     margin-top: 65px;
   }
-  .notice {
-    @include defdiv;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    left: 45%;
-    background-color: #FF7373;
-    padding: 5px 30px;
-    border-radius: 0 0 3px 3px ;
-  }
-  a {
-    color: $medium;
-    text-decoration: none;
-    text-shadow: none;
-    &:hover {
-      text-shadow: 0 0 1px $accent;
-      text-decoration: underline;
-    }
+  .avatar {
+    height: 26px;
+    width: 26px;
+    margin: 7px 7px 0 0;
   }
   .clear { clear: both; }
   footer {

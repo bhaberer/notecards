@@ -8,11 +8,16 @@
       = link_to 'Fill out Yesterday\'s Card', yesterday_path, :class => 'btn btn-info centered-text'
   .entry
     - if current_user.has_done_todays_card?
-      .alert.alert-success
+      .alert.alert-block.alert-success
         %strong Well done!
-        You've submitted today's notecard, remember to come back tomorrow!
+        %p
+          You've submitted today's notecard, remember to come back tomorrow!
+        %p
+          If you made a mistake or need to update today's entry head to your cardbox,
+          you have 48 hours to make any edits nessesary.
+        %br
+        = link_to 'Cardbox', profile_path(current_user.username),
+                  :class => 'btn btn-info centered-text'
+
     - else
       = render 'form'
-  #card
-    - if @cards.present?
-      = render :partial => 'card'

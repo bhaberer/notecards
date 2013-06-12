@@ -2,7 +2,20 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   delegate :capture, :content_tag, :tag, to: :@template
 
-  %w[text_field text_area password_field collection_select time_zone_select email_field].each do |method_name|
+  %w[text_field text_area password_field select collection_select time_select time_zone_select email_field].each do |method_name|
+    define_method(method_name) do |name, *args|
+      errors = object.errors[name].any?? " error" : ""
+      error_msg = object.errors[name].any?? content_tag(:span, object.errors[name].join(","), class: "help-inline") : ""
+
+      content_tag :div, class: "control-group#{errors}" do
+        field_label(name, *args) + content_tag(:div, class: "controls") do
+          super(name, *args) + " " + error_msg
+        end
+      end
+    end
+  end
+
+  %w[time_select].each do |method_name|
     define_method(method_name) do |name, *args|
       errors = object.errors[name].any?? " error" : ""
       error_msg = object.errors[name].any?? content_tag(:span, object.errors[name].join(","), class: "help-inline") : ""
@@ -23,7 +36,11 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
 
   def submit(*args)
-    super(*args, class: "btn btn-primary")
+    content_tag :div, class: 'control-group' do
+      content_tag :div, class: 'controls' do
+        super(*args, class: "btn btn-primary")
+      end
+    end
   end
 
 private

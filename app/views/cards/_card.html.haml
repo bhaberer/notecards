@@ -1,10 +1,15 @@
-.card 
-  %h2 What happened on #{@month}/#{@day}
-  - @cards.each do |card|
-    .entry 
-      .year
-        = card.year
-        .dow= day_of_the_week_for(card) 
-      .text= card.entry
-      %br.clear
-    %br.clear
+.row
+  .card.span10.offset1
+    %h2 What happened on #{@month}/#{@day}
+    - @cards.each do |card|
+      .entry
+        .year
+          = card.year
+          .dow= day_of_the_week_for(card)
+        .text= card.entry
+        - if card.user.vet?
+          Rotation: #{Card::SHIFTS[card.rotation.to_sym]}.
+          %br
+          Shift: #{card.time_in} - #{card.time_out}
+          %br
+          Notes Duration: #{card.notes_duration}
