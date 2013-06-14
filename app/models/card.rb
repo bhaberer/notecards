@@ -4,24 +4,30 @@ class Card < ActiveRecord::Base
                   :time_in, :time_out, :user_id
 
   SHIFTS = {
-    :sa_anesthesia    => 'Small Animal Anesthesia (Critical Patient Care)',
-    :sa_emergency     => 'Small Animal Emergency',
-    :sa_intensive     => 'Small Animal Intensive Care',
-    :sa_medicine      => 'Small Animal Medicine',
-    :sa_com_medicine  => 'Small Animal Community Medicine',
-    :sa_radiology     => 'Small Animal Radiology',
-    :sa_surgery       => 'Small Animal Surgery',
-    :sa_surgery_soft  => 'Small Animal Surgery - Soft Tissue',
-    :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic',
-
     :anatom_path      => 'Anatomic Pathology',
+    :behavior         => 'Behavior',
+    :cape             => 'CAPE',
     :clin_path        => 'Clinical Pathology',
     :cardiology       => 'Cardiology',
     :dermatology      => 'Dermatology',
     :dentistry        => 'Dentistry',
+    :fish_health      => 'Fish Health',
     :neurology        => 'Neuroogy',
+    :nutrition        => 'Nutrition',
     :ophthalmology    => 'Ophthalmology',
-    :oncology         => 'Oncology'
+    :oncology         => 'Oncology',
+    :rad_onc          => 'Radiation Oncology',
+    :shelter_med      => 'Shelter Medicine'
+    :sa_anesthesia    => 'Small Animal Anesthesia (Critical Patient Care)',
+    :sa_com_medicine  => 'Small Animal Community Medicine',
+    :sa_emergency     => 'Small Animal Emergency',
+    :sa_intensive     => 'Small Animal Intensive Care',
+    :sa_medicine      => 'Small Animal Medicine',
+    :sa_outpatient    => 'Small Animal Outpatient',
+    :sa_radiology     => 'Small Animal Radiology',
+    :sa_surgery       => 'Small Animal Surgery',
+    :sa_surgery_soft  => 'Small Animal Surgery - Soft Tissue',
+    :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic',
   }
 
   validates :time_in, :presence => true,
