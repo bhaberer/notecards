@@ -5,7 +5,7 @@
                 :builder => BootstrapFormBuilder do |f|
       %fieldset
         %legend What happened on #{@month}/#{@day}/#{Date.yesterday.year}
-        = f.text_area :entry, :rows => '10', :class => 'span5'
+        = f.text_area :entry, :rows => '4', :class => 'span5'
         - if @day == Date.yesterday.day
           = hidden_field_tag  :yesterday, 'true'
       - if current_user.vet?
