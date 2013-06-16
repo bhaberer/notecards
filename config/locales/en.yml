@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  helpers:
+    label:
+      card:
+        entry: "What happened today?"
+        time_in: "What time did you arrive at the VMTH?"
+        time_out: "What time did you leave the VMTH?"
+        notes_duration: "Time writing records (not at the VMTH)"
