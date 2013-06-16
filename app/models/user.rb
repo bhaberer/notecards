@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :cards
+  after_create :notify_admins
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -21,6 +22,10 @@ class User < ActiveRecord::Base
     username
   end
 
+  def self.admins
+    where(:admin => true)
+  end
+
   def cards_for_month(month)
     self.cards.where(:month => month)
   end
@@ -39,5 +44,11 @@ class User < ActiveRecord::Base
 
   def has_done_yesterdays_card?
     self.cards.card_for_date(Time.zone.now - 1.day).first.present?
+  end
+
+  private
+
+  def notify_admins
+    UserMailer.new_user(user).deliver
   end
 end
