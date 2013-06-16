@@ -13,4 +13,5 @@ class UserMailer < ActionMailer::Base
 
     mail(:subject => "[ 365Cards ] New User!",
          :to => User.admins.map(&:email).join(','))
+  end
 end
