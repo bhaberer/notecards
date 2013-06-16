@@ -17,7 +17,7 @@ class Card < ActiveRecord::Base
     :ophthalmology    => 'Ophthalmology',
     :oncology         => 'Oncology',
     :rad_onc          => 'Radiation Oncology',
-    :shelter_med      => 'Shelter Medicine'
+    :shelter_med      => 'Shelter Medicine',
     :sa_anesthesia    => 'Small Animal Anesthesia (Critical Patient Care)',
     :sa_com_medicine  => 'Small Animal Community Medicine',
     :sa_emergency     => 'Small Animal Emergency',
@@ -27,7 +27,7 @@ class Card < ActiveRecord::Base
     :sa_radiology     => 'Small Animal Radiology',
     :sa_surgery       => 'Small Animal Surgery',
     :sa_surgery_soft  => 'Small Animal Surgery - Soft Tissue',
-    :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic',
+    :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic'
   }
 
   validates :time_in, :presence => true,
