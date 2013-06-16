@@ -49,6 +49,6 @@ class User < ActiveRecord::Base
   private
 
   def notify_admins
-    UserMailer.new_user(user).deliver
+    UserMailer.new_user(self).deliver
   end
 end
