@@ -2,15 +2,24 @@
   .row
     .span3
       %ul#cardbox_nav.nav.nav-list{ 'data-spy' => 'affix', 'data-offset-top' => 0 }
-        - Date::MONTHNAMES[1..12].each do |month|
+        - @months.each do |month|
           %li
             = link_to "##{month.downcase}" do
               = month
               %i.icon-chevron-right
     .span9#cardbox_months
-      - Date::MONTHNAMES[1..12].each do |month|
+      - @months.each_with_index do |month, m_num|
         .month{ :id => month.downcase }
           %h1= month
+          %table.table.table-bordered
+            - @month_days[m_num].times do |num|
+              - if (num) % 7 == 0
+                %tr
+              %td.day
+                = link_to "#{num + 1}", user_day_path(current_user.username, m_num + 1, num + 1)
+            - unless (@month_days[m_num] % 7).zero?
+              - (7 - (@month_days[m_num] % 7)).times do
+                %td.dim
 
 :javascript
   $('body').scrollspy();
