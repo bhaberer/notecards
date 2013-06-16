@@ -13,6 +13,7 @@ gem 'psych'
 gem 'nokogiri'
 gem 'pg',             '~> 0.15.1'
 gem 'jquery-rails',   '~> 2.2.1'
+gem 'airbrake'
 
 
 group :assets do
