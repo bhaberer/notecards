@@ -30,14 +30,11 @@ class Card < ActiveRecord::Base
     :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic'
   }
 
-  validates :time_in, :presence => true,
-                      :allow_nil => true
+  validates :time_in, :presence => true, :if => "rotation.present?"
 
-  validates :time_out, :presence => true,
-                       :allow_nil => true
+  validates :time_out, :presence => true, :if => "rotation.present?"
 
-  validates :notes_duration, :presence => true,
-                             :allow_nil => true
+  validates :notes_duration, :presence => true, :if => "rotation.present?"
 
   validates :rotation, :inclusion => { :in => SHIFTS.keys.map(&:to_s) },
                        :allow_nil => true

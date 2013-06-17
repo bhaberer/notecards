@@ -30,6 +30,13 @@ input[type="checkbox"] {
 .new_card {
   @include defdiv;
   padding: 10px;
+  #vetshift { 
+    legend {
+      a {
+        margin-top: 5px;
+      }
+    }
+  }
 }
 
 #cards_index {

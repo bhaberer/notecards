@@ -3,3 +3,10 @@
 //= require bootstrap
 //= require_self
 //= require_tree .
+
+$(document).ready(function() {
+  $(document).on('click', '#no_shift_link', function(e) {
+    $('#vetshift').remove();
+    e.preventDefault();
+  });
+});

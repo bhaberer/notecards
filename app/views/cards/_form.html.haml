@@ -9,8 +9,10 @@
         - if @day == Date.yesterday.day
           = hidden_field_tag  :yesterday, 'true'
       - if current_user.vet?
-        %fieldset
-          %legend Vet Shift Information
+        %fieldset#vetshift
+          %legend
+            Vet Shift Information
+            = link_to "I don't want to submit a vet shift", '#', :id => 'no_shift_link', :class => 'btn btn-danger btn-small pull-right'
           = f.select  :rotation,
                       Card::SHIFTS.map { |id, name| [name, id] },
                       { :include_blank => true }
