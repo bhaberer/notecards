@@ -30,13 +30,17 @@ class Card < ActiveRecord::Base
     :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic'
   }
 
-  validates :time_in, :presence => true, :if => "rotation.present?"
+  validates :time_in, :presence => { :message => 'Needs to be a valid time (i.e. June 10 5:00pm)' },
+                      :if => "rotation.present?"
 
-  validates :time_out, :presence => true, :if => "rotation.present?"
+  validates :time_out, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
+                       :if => "rotation.present?"
 
-  validates :notes_duration, :presence => true, :if => "rotation.present?"
+  validates :notes_duration, :presence => { :message => 'You need to fill this out (It can be 0)' },
+                             :if => "rotation.present?"
 
-  validates :rotation, :inclusion => { :in => SHIFTS.keys.map(&:to_s) },
+  validates :rotation, :inclusion => { :in => SHIFTS.keys.map(&:to_s),
+                                       :message => 'You need to select a rotation.' },
                        :allow_nil => true
 
   validates :user_id, :uniqueness => { :scope => [:day, :month, :year],
@@ -53,8 +57,8 @@ class Card < ActiveRecord::Base
 
   validates :user, :presence => true
 
-  validates :entry, :presence => true,
-                    :length => { :maximum => 365 }
+  validates :entry, :presence => { :message => 'You need to fill out the entry for today' },
+                    :length => { :maximum => 365, :message => 'Maximum length is 365 characters' }
 
   validate :times_are_parsed
 
@@ -82,10 +86,10 @@ class Card < ActiveRecord::Base
     unless read_attribute(:notes_duration).nil?
       time = []
       mins = read_attribute(:notes_duration) % 60
-      time << "#{mins} mins" unless mins.zero? 
+      time << "#{mins}m" unless mins.zero?
 
       hours = (read_attribute(:notes_duration) / 60).floor
-      time << "#{hours} hours" unless hours.zero?
+      time << "#{hours}h" unless hours.zero?
       return time.join(' ')
     end
   end
@@ -95,13 +99,11 @@ class Card < ActiveRecord::Base
     mins  = time_str[/(\d{1,2})\s?m/, 1].to_i || 0
     if hours.zero? && mins.zero?
       errors.add(method, 'could not be parsed')
-      false
     else
       write_attribute(:notes_duration, (hours * 60) + mins)
     end
   rescue
     errors.add(:notes_duration, 'could not be parsed')
-    false
   end
 
   private
