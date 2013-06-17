@@ -15,19 +15,6 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  %w[time_select].each do |method_name|
-    define_method(method_name) do |name, *args|
-      errors = object.errors[name].any?? " error" : ""
-      error_msg = object.errors[name].any?? content_tag(:span, object.errors[name].join(","), class: "help-inline") : ""
-
-      content_tag :div, class: "control-group#{errors}" do
-        field_label(name, *args) + content_tag(:div, class: "controls") do
-          super(name, *args) + " " + error_msg
-        end
-      end
-    end
-  end
-
   def div(*args, &block)
     options = args.extract_options!
     data = block_given? ? capture(&block) : ''
