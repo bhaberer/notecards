@@ -46,14 +46,11 @@ class Card < ActiveRecord::Base
   validates :user_id, :uniqueness => { :scope => [:day, :month, :year],
                                        :message => 'already has an entry for that day' }
 
-  validates :day, :presence => true,
-                  :inclusion => { :in => 1..31 }
+  validates :day, :presence => true, :inclusion => { :in => 1..31 }
 
-  validates :month, :presence => true,
-                    :inclusion => { :in => 1..12 }
+  validates :month, :presence => true, :inclusion => { :in => 1..12 }
 
-  validates :year, :presence => true,
-                   :format => { :with => /^\d{4}$/ }
+  validates :year, :presence => true, :format => { :with => /^\d{4}$/ }
 
   validates :user, :presence => true
 
@@ -77,43 +74,43 @@ class Card < ActiveRecord::Base
       begin
         write_attribute(method, Time.parse(time_str))
       rescue ArgumentError
-        errors.add(method, 'could not be parsed')
       end
     end
   end
 
   def notes_duration
-    unless read_attribute(:notes_duration).nil?
-      time = []
-      mins = read_attribute(:notes_duration) % 60
-      time << "#{mins}m" unless mins.zero?
+    return nil  if read_attribute(:notes_duration).nil?
+    return 0    if read_attribute(:notes_duration).zero?
 
-      hours = (read_attribute(:notes_duration) / 60).floor
-      time << "#{hours}h" unless hours.zero?
-      return time.join(' ')
-    end
+    time = []
+    mins = read_attribute(:notes_duration) % 60
+    time << "#{mins}m" unless mins.zero?
+
+    hours = (read_attribute(:notes_duration) / 60).floor
+    time << "#{hours}h" unless hours.zero?
+    return time.join(' ')
   end
 
   def notes_duration=(time_str)
-    hours = time_str[/(\d{1,2})\s?h/, 1].to_i || 0
-    mins  = time_str[/(\d{1,2})\s?m/, 1].to_i || 0
-    if hours.zero? && mins.zero?
-      errors.add(method, 'could not be parsed')
+    if time_str == '0'
+      write_attribute(:notes_duration, 0)
     else
-      write_attribute(:notes_duration, (hours * 60) + mins)
+      hours = time_str[/(\d{1,2})\s?h/, 1].to_i
+      mins  = time_str[/(\d{1,2})\s?m/, 1].to_i
+      unless hours.zero? && mins.zero?
+        write_attribute(:notes_duration, (hours * 60) + mins)
+      end
     end
-  rescue
-    errors.add(:notes_duration, 'could not be parsed')
   end
 
   private
 
   def times_are_parsed
-    return true unless self.user.vet?
     [:time_out, :time_in].each do |time|
-      return if read_attribute(time).nil?
-      unless Time.parse(read_attribute(time).to_s)
-        errors.add(method, "was not a valid time")
+      unless read_attribute(time).nil?
+        unless Time.parse(read_attribute(time).to_s)
+          errors.add(method, "was not a valid time")
+        end
       end
     end
   end
