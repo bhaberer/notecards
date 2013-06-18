@@ -5,14 +5,6 @@
 [![Coverage Status](https://coveralls.io/repos/bhaberer/notecards/badge.png?branch=master)](https://coveralls.io/r/bhaberer/notecards?branch=master)
 [![Code Climate](https://codeclimate.com/github/bhaberer/notecards.png)](https://codeclimate.com/github/bhaberer/notecards)
 
-## Installation
-
-TBA
-
-## Usage
-
-TBA
-
 ## Contributing
 
 1. Fork it
