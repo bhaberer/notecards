@@ -1,7 +1,8 @@
 class Card < ActiveRecord::Base
   belongs_to :user
   attr_accessible :entry, :notes_duration, :rotation,
-                  :time_in, :time_out, :user_id
+                  :time_in, :time_out, :user_id,
+                  :day, :month, :year
 
   SHIFTS = {
     :anatom_path      => 'Anatomic Pathology',

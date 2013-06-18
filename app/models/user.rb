@@ -49,6 +49,6 @@ class User < ActiveRecord::Base
   private
 
   def notify_admins
-    UserMailer.new_user(self).deliver
+    UserMailer.new_user(self).deliver unless User.admins.blank?
   end
 end

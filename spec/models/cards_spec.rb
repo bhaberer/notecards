@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Cards' do
-  
+
   before(:all) do
     User.create(:email => 'tester@fadedpixels.net', :username => 'tester', :password => 'notecard', :password_confirmation => 'notecard')
   end
@@ -33,19 +33,19 @@ describe 'Cards' do
     Card.create(:user_id => 1, :day => 5, :year => 2000, :entry => "Testing").should_not be_valid
     Card.create(:user_id => 1, :day => 5, :month => 1, :year => 2000, :entry => "Testing").should be_valid
   end
-  
+
   it "should require a month between 1-12" do
     Card.create(:user_id => 1, :month => 0, :day => 2, :year => 2000, :entry => "Testing").should_not be_valid
     Card.create(:user_id => 1, :month => 1, :day => 2, :year => 2000, :entry => "Testing").should be_valid
     Card.create(:user_id => 1, :month => 12, :day => 6, :year => 2000, :entry => "Testing").should be_valid
     Card.create(:user_id => 1, :month => 13, :day => 6, :year => 2000, :entry => "Testing").should_not be_valid
   end
-  
+
   it "should require a year" do
     Card.create(:user_id => 1, :month => 6, :day => 1, :entry => "Testing").should_not be_valid
     Card.create(:user_id => 1, :month => 6, :day => 1, :year => 2000, :entry => "Testing").should be_valid
   end
-  
+
   it "should require a year in the right format" do
     Card.create(:user_id => 1, :month => 7, :day => 1, :year => 20, :entry => "Testing").should_not be_valid
     Card.create(:user_id => 1, :month => 7, :day => 1, :year => 2000, :entry => "Testing").should be_valid

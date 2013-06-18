@@ -14,6 +14,7 @@ gem 'nokogiri'
 gem 'pg',             '~> 0.15.1'
 gem 'jquery-rails',   '~> 3.0.1'
 gem 'airbrake'
+gem 'multi_json',     '~> 1.7.7'
 
 
 group :assets do
@@ -27,12 +28,11 @@ group :development do
   gem 'factory_girl_rails'
 end
 
+gem 'rspec',          '~> 2.13.0'
+gem 'rspec-rails',    '~> 2.6'
 group :test do
+  gem 'coveralls'
   gem 'turn', '0.8.2', :require => false
-  gem 'rspec',          '~> 2.13.0'
-  gem 'rspec-rails',    '~> 2.6'
-  gem 'cucumber'
-  gem 'cucumber-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner', '0.5.2'
   gem 'simplecov', :require => false
