@@ -1,6 +1,5 @@
 nguage: ruby
 rvm:
-  - ruby-head
   - 1.9.3
 before_script:
   - mysql -e 'create database notecards_test;'
