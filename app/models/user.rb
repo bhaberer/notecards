@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
 
+  def card_for_date(time)
+    self.cards_for_date(time).first
+  end
+
+  def cards_for_date(time)
+    self.cards.where(:day => time.day, :month => time.month, :year => time.year)
+  end
+
   def gravatar(size=48)
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}.png?s=#{size}&d=identicon"
   end
@@ -39,11 +47,11 @@ class User < ActiveRecord::Base
   end
 
   def has_done_todays_card?
-    self.cards.card_for_date(Time.zone.now).first.present?
+    self.card_for_date(Time.zone.now).present?
   end
 
   def has_done_yesterdays_card?
-    self.cards.card_for_date(Time.zone.now - 1.day).first.present?
+    self.card_for_date(Time.zone.now - 1.day).present?
   end
 
   private

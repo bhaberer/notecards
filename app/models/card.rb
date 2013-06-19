@@ -31,12 +31,6 @@ class Card < ActiveRecord::Base
     :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic'
   }
 
-  validates :time_in, :presence => { :message => 'Needs to be a valid time (i.e. June 10 5:00pm)' },
-                      :if => "rotation.present?"
-
-  validates :time_out, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
-                       :if => "rotation.present?"
-
   validates :notes_duration, :presence => { :message => 'You need to fill this out (It can be 0)' },
                              :if => "rotation.present?"
 
@@ -58,13 +52,9 @@ class Card < ActiveRecord::Base
   validates :entry, :presence => { :message => 'You need to fill out the entry for today' },
                     :length => { :maximum => 365, :message => 'Maximum length is 365 characters' }
 
-  validate :times_are_parsed
-
-  def self.card_for_date(time)
-    where(:day => time.day, :month => time.month, :year => time.year)
-  end
-
   [:time_out, :time_in].each do |method|
+    validates method, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
+                      :if => "rotation.present?"
     define_method method.to_s do
       unless read_attribute(method).nil?
         read_attribute(method).strftime("%b %e %l:%M %P")
@@ -73,8 +63,13 @@ class Card < ActiveRecord::Base
 
     define_method "#{method}=" do |time_str|
       begin
-        write_attribute(method, Time.parse(time_str))
+        if time_str.nil?
+          write_attribute(method, nil)
+        else
+          write_attribute(method, Time.parse(time_str))
+        end
       rescue ArgumentError
+        write_attribute(method, nil)
       end
     end
   end
@@ -93,25 +88,15 @@ class Card < ActiveRecord::Base
   end
 
   def notes_duration=(time_str)
-    if time_str == '0'
+    if [0, '0'].include?(time_str)
       write_attribute(:notes_duration, 0)
+    elsif time_str.nil?
+      write_attribute(:notes_duration, nil)
     else
       hours = time_str[/(\d{1,2})\s?h/, 1].to_i
       mins  = time_str[/(\d{1,2})\s?m/, 1].to_i
       unless hours.zero? && mins.zero?
         write_attribute(:notes_duration, (hours * 60) + mins)
-      end
-    end
-  end
-
-  private
-
-  def times_are_parsed
-    [:time_out, :time_in].each do |time|
-      unless read_attribute(time).nil?
-        unless Time.parse(read_attribute(time).to_s)
-          errors.add(method, "was not a valid time")
-        end
       end
     end
   end
