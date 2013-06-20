@@ -58,7 +58,7 @@ class Card < ActiveRecord::Base
 
     define_method method do
       unless read_attribute(method).nil?
-        read_attribute(method).zone.strftime("%b %e %l:%M %P")
+        read_attribute(method).strftime("%b %e %l:%M %P")
       end
     end
 
