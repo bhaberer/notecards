@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def last_entries
-    self.cards.limit(10)
+    self.cards.order('year desc, month desc, day desc').limit(10)
   end
 
   def has_done_todays_card?

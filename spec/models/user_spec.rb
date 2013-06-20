@@ -81,7 +81,6 @@ describe User do
     end
   end
 
-
   describe :card_for_date do
     before(:each) do
       @user = FactoryGirl.create(:user)
@@ -98,6 +97,11 @@ describe User do
     it 'should not return cards when there was no entry for that day' do
       @user.card_for_date(Time.parse('Feb 1 2000')).
         should be_nil
+    end
+
+    it 'should return nothing on an invalid date' do
+      @user.card_for_date('Feb 1 2000').
+        should be_empty
     end
   end
 
@@ -116,6 +120,78 @@ describe User do
       FactoryGirl.create(:user, :email => 'boo@sdasd.com')
       User.all.length.should == 2
       User.admins.length.should == 1
+    end
+  end
+
+  describe :gravatar do
+    it 'should return a avatar link given a user' do
+      FactoryGirl.create(:user).gravatar.
+        should == 'http://gravatar.com/avatar/6fc2bfa8514fbacb2b1ccceeca22f372.png?s=48&d=identicon'
+    end
+
+    it 'should allow you to set an optional size for the avatar' do
+      FactoryGirl.create(:user).gravatar(10).
+        should == 'http://gravatar.com/avatar/6fc2bfa8514fbacb2b1ccceeca22f372.png?s=10&d=identicon'
+    end
+  end
+
+  describe :last_entries do
+    before(:each) do
+      @user = FactoryGirl.create(:user, :admin => true)
+    end
+
+    it 'should return only 10 cards for a user' do
+      (1..20).each { |d| FactoryGirl.create(:card, :user => @user, :day => d) }
+      @user.last_entries.count.
+        should == 10
+    end
+
+    it 'should return fewer than 10 cards if the user has not made that many' do
+      (1..7).each { |d| FactoryGirl.create(:card, :user => @user, :day => d) }
+      @user.last_entries.count.
+        should == 7
+    end
+
+    it 'should return the 10 last entries' do
+      (1..20).each { |d| FactoryGirl.create(:card, :user => @user, :day => d) }
+      @user.last_entries.
+        should_not include(@user.cards_for_day(1, 9).first)
+    end
+  end
+
+  describe :has_done_todays_card? do
+    it 'should return true if user has done todays card' do
+      @user = FactoryGirl.create(:user, :admin => true)
+      @time = Time.now
+      FactoryGirl.create(:card, :user => @user, :day => @time.day,
+                                :month => @time.month, :year => @time.year,)
+      @user.has_done_todays_card?.should be_true
+    end
+
+    it 'should return false when user hasnt done a card today' do
+      @user = FactoryGirl.create(:user, :admin => true)
+      @time = Time.now - 1.day
+      FactoryGirl.create(:card, :user => @user, :day => @time.day,
+                                :month => @time.month, :year => @time.year,)
+      @user.has_done_todays_card?.should be_false
+    end
+  end
+
+  describe :has_done_yesterdays_card? do
+    it 'should return true if user has done yesterdays card' do
+      @user = FactoryGirl.create(:user, :admin => true)
+      @time = Time.now - 1.day
+      FactoryGirl.create(:card, :user => @user, :day => @time.day,
+                                :month => @time.month, :year => @time.year,)
+      @user.has_done_yesterdays_card?.should be_true
+    end
+
+    it 'should return false when user hasnt done a card today' do
+      @user = FactoryGirl.create(:user, :admin => true)
+      @time = Time.now
+      FactoryGirl.create(:card, :user => @user, :day => @time.day,
+                                :month => @time.month, :year => @time.year,)
+      @user.has_done_yesterdays_card?.should be_false
     end
   end
 end

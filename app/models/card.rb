@@ -101,7 +101,7 @@ class Card < ActiveRecord::Base
   private
 
   def times_are_different
-    if self.time_in == self.time_out
+    if self.time_in.present? && self.time_out.present? && self.time_in == self.time_out
       errors.add(:time_in, 'Time in and Time out must be different times')
       errors.add(:time_out, 'Time in and Time out must be different times')
     end
