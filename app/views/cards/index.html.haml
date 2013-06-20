@@ -16,7 +16,7 @@
               - if (num) % 7 == 0
                 %tr
               %td.day
-                = link_to "#{num + 1}", user_day_path(current_user.username, m_num + 1, num + 1)
+                = link_to "#{num + 1}", user_day_path(params[:username], m_num + 1, num + 1)
             - unless (@month_days[m_num] % 7).zero?
               - (7 - (@month_days[m_num] % 7)).times do
                 %td.dim
