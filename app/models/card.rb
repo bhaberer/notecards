@@ -56,12 +56,6 @@ class Card < ActiveRecord::Base
     validates method, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
                       :if => "rotation.present?"
 
-    define_method method do
-      unless read_attribute(method).nil?
-        read_attribute(method).strftime("%b %e %l:%M %P")
-      end
-    end
-
     define_method "#{method}=" do |time_str|
       begin
         if time_str.nil?

@@ -10,6 +10,6 @@
         - if card.rotation.present?
           Rotation: #{Card::SHIFTS[card.rotation.to_sym]}.
           %br
-          Shift: #{card.time_in} - #{card.time_out}
+          Shift: #{card.time_in.strftime("%b %e %l:%M %P")} - #{card.time_out.strftime("%b %e %l:%M %P")}
           %br
           Notes Duration: #{card.notes_duration}

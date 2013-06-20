@@ -17,9 +17,9 @@
                       Card::SHIFTS.map { |id, name| [name, id] },
                       { :include_blank => true }
           = f.text_field :time_in,  :placeholder => 'May 5, 3:00pm',
-                                    :value => @card.time_in
+                                    :value => @card.time_in.strftime("%b %e %l:%M %P")
           = f.text_field :time_out, :placeholder => 'May 5, 9:00pm',
-                                    :value => @card.time_out
+                                    :value => @card.time_out.strftime("%b %e %l:%M %P")
           = f.text_field :notes_duration, :placeholder => '1h 35m',
                                     :value => @card.notes_duration
 
