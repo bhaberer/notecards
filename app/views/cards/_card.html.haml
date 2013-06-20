@@ -7,7 +7,7 @@
           = card.year
           .dow= day_of_the_week_for(card)
         .text= card.entry
-        - if card.user.vet?
+        - if card.rotation.present?
           Rotation: #{Card::SHIFTS[card.rotation.to_sym]}.
           %br
           Shift: #{card.time_in} - #{card.time_out}

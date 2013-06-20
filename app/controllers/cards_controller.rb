@@ -87,7 +87,7 @@ class CardsController < ApplicationController
     user = User.find_by_username(params[:username])
 
     if user.present?
-      unless user == current_user || user.public? || user.admin?
+      unless user == current_user || user.public? || current_user.admin?
         redirect_to(root_path, :notice => "Sorry, that user's cards are private")
       end
     end
