@@ -55,7 +55,8 @@ class Card < ActiveRecord::Base
   [:time_out, :time_in].each do |method|
     validates method, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
                       :if => "rotation.present?"
-    define_method method.to_s do
+
+    define_method method do
       unless read_attribute(method).nil?
         read_attribute(method).strftime("%b %e %l:%M %P")
       end
@@ -73,6 +74,8 @@ class Card < ActiveRecord::Base
       end
     end
   end
+
+  validate :times_are_different
 
   def notes_duration
     return nil  if read_attribute(:notes_duration).nil?
@@ -98,6 +101,15 @@ class Card < ActiveRecord::Base
       unless hours.zero? && mins.zero?
         write_attribute(:notes_duration, (hours * 60) + mins)
       end
+    end
+  end
+
+  private
+
+  def times_are_different
+    if self.time_in == self.time_out
+      errors.add(:time_in, 'Time in and Time out must be different times')
+      errors.add(:time_out, 'Time in and Time out must be different times')
     end
   end
 end

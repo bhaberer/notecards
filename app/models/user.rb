@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   has_many :cards
   after_create :notify_admins
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise  :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
           :validatable
 
@@ -12,15 +10,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username,
                   :email_reminder
 
-  validates_presence_of :username
+  validates :username, :presence => { :message => 'You need to pick a username' }
 
-  def card_for_date(time)
-    self.cards_for_date(time).first
-  end
-
-  def cards_for_date(time)
-    self.cards.where(:day => time.day, :month => time.month, :year => time.year)
-  end
 
   def gravatar(size=48)
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}.png?s=#{size}&d=identicon"
@@ -34,12 +25,22 @@ class User < ActiveRecord::Base
     where(:admin => true)
   end
 
+  def card_for_date(time)
+    cards_for_day(time.month, time.day).where(:year => time.year).first
+  rescue NoMethodError
+    []
+  end
+
+  def cards_for_day(month, day)
+    cards_for_month(month).where(:day => day)
+  end
+
   def cards_for_month(month)
     self.cards.where(:month => month)
   end
 
-  def cards_for_day(month, day)
-    self.cards.where(:month => month, :day => day)
+  def cards_for_year(year)
+    self.cards.where(:year => year)
   end
 
   def last_entries

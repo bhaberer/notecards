@@ -1,14 +1,16 @@
 Notecards::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  # Time zone
-  config.time_zone = "Pacific Time (US & Canada)"
+  # Mass Assignment is bad
+  config.active_record.mass_assignment_sanitizer = :strict
 
   # The test environment is used exclusively to run your application's
   # test suite.  You never need to work with it otherwise.  Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs.  Don't rely on the data there!
   config.cache_classes = true
+
+  config.action_mailer.default_url_options = { :host => 'umloud-staging.heroku.com' }
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
@@ -32,6 +34,12 @@ Notecards::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
+
+  # Don't try to send the message
+  config.action_mailer.perform_deliveries = false
+
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
@@ -40,9 +48,8 @@ Notecards::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  # Devise needs a default URL for its mails
-  config.action_mailer.default_url_options = { :host => '192.168.1.69' }
+  config.time_zone = "Pacific Time (US & Canada)"
 
-  # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
+  # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
+  config.assets.allow_debugging = true
 end
