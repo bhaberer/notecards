@@ -61,7 +61,7 @@ class Card < ActiveRecord::Base
         if time_str.nil?
           write_attribute(method, nil)
         else
-          write_attribute(method, Time.parse(time_str))
+          write_attribute(method, Time.zone.parse(time_str))
         end
       rescue ArgumentError
         write_attribute(method, nil)
