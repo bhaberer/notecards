@@ -1,8 +1,8 @@
 .row
-  .card.span10.offset1
+  .span10.offset1
     %h2 What happened on #{@month}/#{@day}
     - @cards.each do |card|
-      .entry
+      .entry[card]
         .year
           = card.year
           .dow= day_of_the_week_for(card)
