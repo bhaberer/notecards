@@ -1,12 +1,11 @@
 class StaticController < ApplicationController
 
-  def index 
-    if user_signed_in? 
+  def index
+    if user_signed_in?
       redirect_to home_path
-    end 
-  end 
+    end
+  end
 
   def notfound
   end
-
 end
