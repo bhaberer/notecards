@@ -1,55 +1,48 @@
 require 'spec_helper'
 
-describe "Notecards" do
+describe "Notecards Static views" do
 
-  before do
+  before(:each) do
+    User.all.map(&:destroy)
     visit root_path
   end
 
-  context "as a guest on the home page" do
+  describe "as a guest on the home page" do
 
-    it "should show the front page to guests" do
-      page.should have_link('Sign Up')
-    end
-
-    it "should allow guests to navigate to the signup page" do
-      within('#main') do
-        click_link('Sign Up')
+    describe 'the sign up flow' do
+      it "should show the front page to guests" do
+        page.should have_link('Sign Up')
       end
 
-      page.should have_xpath('//div[@class="form"]/form')
-    end
-
-    it "should show guests the signup form on the signup page" do
-      within('#main') do
-        click_link('Sign Up')
+      it "should allow guests to navigate to the signup page" do
+        within('.main') do
+          click_link('Sign Up')
+        end
+        page.should have_xpath('//form[@class="form-horizontal"]')
       end
 
-      page.should have_field('user_username')
-      page.should have_field('user_email')
-      page.should have_field('user_password')
-      page.should have_field('user_password_confirmation')
-    end
+      it "should show guests the signup form on the signup page" do
+        within('.main') do
+          click_link('Sign Up')
+        end
 
-    it "should allow guests to navigate to the signup page" do
-      within('nav') do
-        click_link('Sign up')
+        page.should have_field('user_username')
+        page.should have_field('user_email')
+        page.should have_field('user_password')
+        page.should have_field('user_password_confirmation')
       end
-
-      page.should have_field('user_username')
     end
 
     it "should allow guests to navigate to the signin page" do
-      within('nav') do
-        click_link('Sign in')
+      within('.navbar') do
+        click_link('Log In')
       end
-
-      page.should have_xpath('//div[@class="form"]/form')
+      page.should have_xpath('//form[@class="form-horizontal"]')
     end
 
     it "should allow guests to navigate to the signin page" do
-      within('nav') do
-        click_link('Sign in')
+      within('.navbar') do
+        click_link('Log In')
       end
 
       page.should have_field('user_username')
@@ -57,7 +50,7 @@ describe "Notecards" do
     end
 
     it "should not allow guests to access user profiles" do
-      FactoryGirl.create(:user, :username => 'bob')
+      FactoryGirl.create(:user, :username => 'bob', :email => 'bob1@foobar.com')
 
       visit profile_path('bob')
 
@@ -73,8 +66,8 @@ describe "Notecards" do
 
   context "as a new user" do
 
-    it "should show allow guests tpo signup on the signup page" do
-      within('#main') do
+    it "should show allow guests to signup on the signup page" do
+      within('.main') do
         click_link('Sign Up')
       end
 
@@ -84,13 +77,14 @@ describe "Notecards" do
       page.fill_in 'Confirm Password', :with => 'notecard'
       page.click_button 'Sign up'
 
-      page.should have_content("Signed in as tester.")
+      page.should have_content("Logged in as tester")
 
     end
 
     it "should allow users to log in" do
       reset_session!
       visit login_path
+      FactoryGirl.create(:user, :username => 'tester', :password => 'notecard')
 
       page.fill_in 'Username', :with => 'tester'
       page.fill_in 'Password', :with => 'notecard'
@@ -103,6 +97,7 @@ describe "Notecards" do
 
   context "as an existing user" do
     before(:each) do
+      FactoryGirl.create(:user, :username => 'tester', :password => 'notecard')
       visit login_path
       page.fill_in 'Username', :with => 'tester'
       page.fill_in 'Password', :with => 'notecard'
@@ -110,19 +105,13 @@ describe "Notecards" do
     end
 
     it "should show the logged in user the card for the day" do
-      page.should have_content("Whats happening on #{Time.now.month}/#{Time.now.day}")
-      page.should have_xpath("//div[@class='entry']/div[@class='text']/textarea")
+      page.should have_content([Time.now.month, Time.now.day, Time.now.year].join(' / '))
+      page.should have_xpath("//textarea[@id='card_entry']")
     end
 
     it "should allow the user to fill out the card for the day" do
       page.fill_in 'card_entry', :with => 'Testing Entry'
-      page.click_button "Write Card"
-
-      page.should have_xpath("//div[@class='card']/div[@class='entry']/div[@class='year']", :text => Time.now.year.to_s)
-      page.should have_xpath("//div[@class='card']/div[@class='entry']/div[@class='text']", :text => "Testing Entry")
-      card = User.last.cards.last
-      card.entry.should == "Testing Entry"
+      page.click_button "Save Card"
     end
-
   end
 end
