@@ -39,6 +39,13 @@ input[type="checkbox"] {
   }
 }
 
+#cards_day {
+  .day{
+    @include defdiv;
+    padding: 0 10px;
+  }
+}
+
 #cards_index {
   .nav {
     @include defdiv;
