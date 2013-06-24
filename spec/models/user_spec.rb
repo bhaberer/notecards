@@ -162,7 +162,7 @@ describe User do
   describe :has_done_todays_card? do
     it 'should return true if user has done todays card' do
       @user = FactoryGirl.create(:user, :admin => true)
-      @time = Time.now
+      @time = Time.zone.now
       FactoryGirl.create(:card, :user => @user, :day => @time.day,
                                 :month => @time.month, :year => @time.year,)
       @user.has_done_todays_card?.should be_true
@@ -170,7 +170,7 @@ describe User do
 
     it 'should return false when user hasnt done a card today' do
       @user = FactoryGirl.create(:user, :admin => true)
-      @time = Time.now - 1.day
+      @time = Time.zone.now - 1.day
       FactoryGirl.create(:card, :user => @user, :day => @time.day,
                                 :month => @time.month, :year => @time.year,)
       @user.has_done_todays_card?.should be_false
@@ -180,7 +180,7 @@ describe User do
   describe :has_done_yesterdays_card? do
     it 'should return true if user has done yesterdays card' do
       @user = FactoryGirl.create(:user, :admin => true)
-      @time = Time.now - 1.day
+      @time = Time.zone.now - 1.day
       FactoryGirl.create(:card, :user => @user, :day => @time.day,
                                 :month => @time.month, :year => @time.year,)
       @user.has_done_yesterdays_card?.should be_true
@@ -188,7 +188,7 @@ describe User do
 
     it 'should return false when user hasnt done a card today' do
       @user = FactoryGirl.create(:user, :admin => true)
-      @time = Time.now
+      @time = Time.zone.now
       FactoryGirl.create(:card, :user => @user, :day => @time.day,
                                 :month => @time.month, :year => @time.year,)
       @user.has_done_yesterdays_card?.should be_false

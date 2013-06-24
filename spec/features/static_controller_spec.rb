@@ -105,7 +105,7 @@ describe "Notecards Static views" do
     end
 
     it "should show the logged in user the card for the day" do
-      page.should have_content([Time.now.month, Time.now.day, Time.now.year].join(' / '))
+      page.should have_content([Time.zone.now.month, Time.zone.now.day, Time.zone.now.year].join(' / '))
       page.should have_xpath("//textarea[@id='card_entry']")
     end
 
