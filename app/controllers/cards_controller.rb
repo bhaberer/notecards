@@ -1,7 +1,11 @@
 class CardsController < ApplicationController
-  respond_to :js
+  respond_to :js, :xls
   before_filter :authenticate_user!, :except => [:index, :mailin]
   before_filter :auth_check
+
+  def data
+    @cards = current_user.cards
+  end
 
   def mailin
   end

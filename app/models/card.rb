@@ -71,6 +71,15 @@ class Card < ActiveRecord::Base
 
   validate :times_are_different
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |product|
+        csv << product.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def notes_duration
     return nil  if read_attribute(:notes_duration).nil?
     return 0    if read_attribute(:notes_duration).zero?
@@ -82,6 +91,11 @@ class Card < ActiveRecord::Base
     hours = (read_attribute(:notes_duration) / 60).floor
     time << "#{hours}h" unless hours.zero?
     return time.join(' ')
+  end
+
+  def shift_duration
+    return 0 if self.time_in.nil? || self.time_out.nil?
+    self.time_out - self.time_in
   end
 
   def notes_duration=(time_str)

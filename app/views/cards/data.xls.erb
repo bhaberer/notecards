@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+        <Cell><Data ss:Type="String">Rotation</Data></Cell>
+        <Cell><Data ss:Type="String">Time In</Data></Cell>
+        <Cell><Data ss:Type="String">Time Out</Data></Cell>
+        <Cell><Data ss:Type="String">Duration</Data></Cell>
+        <Cell><Data ss:Type="String">Notes Time</Data></Cell>
+      </Row>
+    <% @cards.each do |card| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= [card.month, card.day, card.year].join('/') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Card::SHIFTS[card.rotation] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.time_in %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= card.time_out %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= card.shift_duration %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= card.notes_duration %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
