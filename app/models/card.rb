@@ -95,7 +95,7 @@ class Card < ActiveRecord::Base
 
   def shift_duration
     return 0 if self.time_in.nil? || self.time_out.nil?
-    self.time_out - self.time_in
+    (self.time_out - self.time_in).to_f / 3600
   end
 
   def notes_duration=(time_str)

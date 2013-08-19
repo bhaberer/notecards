@@ -17,11 +17,11 @@
     <% @cards.each do |card| %>
       <Row>
         <Cell><Data ss:Type="String"><%= [card.month, card.day, card.year].join('/') %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= Card::SHIFTS[card.rotation] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.rotation.present? ? Card::SHIFTS[card.rotation.to_sym] : '' %></Data></Cell>
         <Cell><Data ss:Type="String"><%= card.time_in %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= card.time_out %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= card.shift_duration %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= card.notes_duration %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.time_out %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.shift_duration %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.notes_duration %></Data></Cell>
       </Row>
     <% end %>
     </Table>
