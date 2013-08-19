@@ -21,7 +21,7 @@
         <Cell><Data ss:Type="String"><%= card.time_in %></Data></Cell>
         <Cell><Data ss:Type="String"><%= card.time_out %></Data></Cell>
         <Cell><Data ss:Type="String"><%= card.shift_duration %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= card.notes_duration %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= card.notes_duration(true) %></Data></Cell>
       </Row>
     <% end %>
     </Table>

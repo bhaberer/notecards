@@ -80,7 +80,14 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def notes_duration
+  def shift_duration
+    return 0 if self.time_in.nil? || self.time_out.nil?
+    (self.time_out - self.time_in).to_f / 3600
+  end
+
+  def notes_duration(raw = false)
+    return (read_attribute(:notes_duration).to_f / 60).round(2) if raw
+
     return nil  if read_attribute(:notes_duration).nil?
     return 0    if read_attribute(:notes_duration).zero?
 
@@ -91,11 +98,6 @@ class Card < ActiveRecord::Base
     hours = (read_attribute(:notes_duration) / 60).floor
     time << "#{hours}h" unless hours.zero?
     return time.join(' ')
-  end
-
-  def shift_duration
-    return 0 if self.time_in.nil? || self.time_out.nil?
-    (self.time_out - self.time_in).to_f / 3600
   end
 
   def notes_duration=(time_str)

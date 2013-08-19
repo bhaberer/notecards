@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   before_filter :auth_check
 
   def data
-    @cards = current_user.cards
+    @cards = current_user.cards.order('year').order('month').order('day')
   end
 
   def mailin
