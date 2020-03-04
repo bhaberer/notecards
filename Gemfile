@@ -13,7 +13,7 @@ gem 'json',           '~> 1.8.0'
 gem 'psych',          '~> 1.3.4'
 gem 'nokogiri',       '~> 1.6.0'
 gem 'pg',             '~> 0.16.0'
-gem 'jquery-rails',   '~> 3.0.4'
+gem 'jquery-rails',   '~> 3.1.3'
 gem 'airbrake'
 gem 'multi_json',     '~> 1.7.9'
 
