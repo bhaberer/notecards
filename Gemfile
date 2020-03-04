@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails',          '~> 3.2.16'
+gem 'rails',          '~> 3.2.17'
 gem 'aws-s3',         '~> 0.6.3'
 gem 'paperclip',      '~> 3.5.1'
 gem 'haml',           '~> 4.0.3'
