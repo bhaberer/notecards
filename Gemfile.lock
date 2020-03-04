@@ -100,11 +100,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    mini_portile (0.5.2)
+    mini_portile2 (2.1.0)
     multi_json (1.7.9)
     mysql2 (0.3.14)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -211,7 +211,7 @@ DEPENDENCIES
   lorem-ipsum-me
   multi_json (~> 1.7.9)
   mysql2
-  nokogiri (~> 1.6.0)
+  nokogiri (~> 1.6.8)
   paperclip (~> 3.5.1)
   pg (~> 0.16.0)
   psych (~> 1.3.4)
