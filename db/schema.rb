@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_231134) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_11_22_232020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,11 +20,11 @@ ActiveRecord::Schema.define(version: 2022_11_22_231134) do
     t.integer "month"
     t.integer "year"
     t.text "entry"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "rotation", limit: 255
-    t.datetime "time_in"
-    t.datetime "time_out"
+    t.datetime "time_in", precision: nil
+    t.datetime "time_out", precision: nil
     t.integer "notes_duration"
   end
 
@@ -33,15 +32,15 @@ ActiveRecord::Schema.define(version: 2022_11_22_231134) do
     t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip", limit: 255
     t.string "last_sign_in_ip", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "username", limit: 255
     t.boolean "admin", default: false
     t.boolean "public", default: false

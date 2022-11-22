@@ -1,9 +1,5 @@
-/*
- *= require_self
- *= require_tree .
-*/
-@import 'mixins';
-@import "bootstrap";
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
 
 $light: #ADAAB0;
 $medium: #5E5C60;
@@ -30,7 +26,7 @@ input[type="checkbox"] {
 .new_card {
   @include defdiv;
   padding: 10px;
-  #vetshift { 
+  #vetshift {
     legend {
       a {
         margin-top: 5px;

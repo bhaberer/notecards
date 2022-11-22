@@ -3,7 +3,7 @@
   %head
     %title Notecards
     = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     = csrf_meta_tags
   %body
     %header

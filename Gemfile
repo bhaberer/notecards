@@ -1,10 +1,11 @@
 source 'http://rubygems.org'
 
-ruby '2.7.4'
+ruby '3.1.2'
 
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 7.0.4'
 
 gem 'aws-sdk-s3'
+gem 'cssbundling-rails'
 gem 'paperclip', '~> 3.5.1'
 gem 'haml-rails'
 gem 'devise'
@@ -14,11 +15,13 @@ gem "image_processing"
 gem 'pg', '~> 1.2.3'
 gem 'jquery-rails'
 gem 'listen'
+gem "puma"
+gem "jsbundling-rails", "~> 1.0"
+
 gem 'multi_json'
 gem 'bootsnap', require: false
 gem 'sass-rails'
 gem 'bootstrap'
-gem 'coffee-script'
 
 group :development do
   gem 'factory_bot_rails'
