@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.0.0'
+ruby '2.7.4'
 
 gem 'rails',          '~> 3.2.17'
 gem 'aws-s3',         '~> 0.6.3'
@@ -12,7 +12,7 @@ gem 'devise',         '~> 2.2.6'
 gem 'json',           '~> 2.3.1'
 gem 'psych',          '~> 1.3.4'
 gem 'nokogiri',       '~> 1.6.8'
-gem 'pg',             '~> 0.16.0'
+gem 'pg',             '~> 1.2.3'
 gem 'jquery-rails',   '~> 3.1.3'
 gem 'airbrake'
 gem 'multi_json',     '~> 1.7.9'
@@ -25,7 +25,6 @@ group :assets do
 end
 
 group :development do
-  gem 'mysql2'
   gem 'factory_girl_rails'
 end
 
