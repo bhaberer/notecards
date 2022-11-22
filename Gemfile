@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.7.4'
 
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1.0'
 
 gem 'aws-sdk-s3'
 gem 'paperclip', '~> 3.5.1'
@@ -10,6 +10,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'json'
 gem 'nokogiri'
+gem "image_processing"
 gem 'pg', '~> 1.2.3'
 gem 'jquery-rails'
 gem 'listen'
