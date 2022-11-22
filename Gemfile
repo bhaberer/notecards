@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.7.4'
 
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 6.0.0'
 
 gem 'aws-sdk-s3'
 gem 'paperclip', '~> 3.5.1'
@@ -28,8 +28,6 @@ end
 group :test do
   gem 'coveralls'
   gem 'turn', '0.8.2'
-  gem 'database_cleaner', '0.5.2'
-  gem 'simplecov'
   gem 'capybara'
   gem 'lorem-ipsum-me'
 end

@@ -1,5 +1,6 @@
 class Card < ApplicationRecord
   belongs_to :user
+
   SHIFTS = {
     :anatom_path      => 'Anatomic Pathology',
     :behavior         => 'Behavior',
@@ -27,8 +28,8 @@ class Card < ApplicationRecord
     :sa_surgery_ortho => 'Small Animal Surgery - Orthopedic'
   }
 
-  validates :notes_duration, :presence => { :message => 'You need to fill this out (It can be 0)' },
-                             :if => "rotation.present?"
+  validates :notes_duration,
+      presence: { :message => 'You need to fill this out (It can be 0)' }
 
   validates :rotation, :inclusion => { :in => SHIFTS.keys.map(&:to_s),
                                        :message => 'You need to select a rotation.' },
@@ -41,7 +42,7 @@ class Card < ApplicationRecord
 
   validates :month, :presence => true, :inclusion => { :in => 1..12 }
 
-  validates :year, :presence => true, :format => { :with => /^\d{4}$/ }
+  validates :year, :presence => true, :format => { :with => /\A^\d{4}$\z/ }
 
   validates :user, :presence => true
 
@@ -49,10 +50,9 @@ class Card < ApplicationRecord
                     :length => { :maximum => 365, :message => 'Maximum length is 365 characters' }
 
   [:time_out, :time_in].each do |method|
-    validates method, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' },
-                      :if => "rotation.present?"
+    validates method, :presence => { :message => 'Needs to be a valid time (i.e. Jan 15 5pm)' }
 
-    define_method "#{method}=" do |time_str|
+    define_method("#{method}=") do |time_str|
       begin
         if time_str.nil?
           write_attribute(method, nil)
