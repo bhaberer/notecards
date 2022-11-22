@@ -1,16 +1,11 @@
-class User < ActiveRecord::Base
-
+class User < ApplicationRecord
   has_many :cards
   after_create :notify_admins
 
   devise  :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
           :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username,
-                  :email_reminder, :time_zone
-
-  validates :username, :presence => { :message => 'You need to pick a username' }
+  validates :username, presence: { message: 'You need to pick a username' }
 
 
   def gravatar(size=48)

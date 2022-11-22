@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   respond_to :js, :xls
-  before_filter :authenticate_user!, :except => [:index, :mailin]
-  before_filter :auth_check
+  before_action :authenticate_user!, :except => [:index, :mailin]
+  before_action :auth_check
 
   def data
     @cards = current_user.cards.order('year').order('month').order('day')

@@ -1,5 +1,4 @@
-Notecards::Application.routes.draw do
-
+Rails.application.routes.draw do
   devise_for :users
   devise_scope :user do
     get 'login',    to: "devise/sessions#new"
@@ -25,7 +24,4 @@ Notecards::Application.routes.draw do
   get ':username',      to: 'cards#index',  as: 'profile'
 
   root :to => "static#index"
-
-  # Hack to allow custom 404 partial, since rails doesn't let me override RoutingError atm
-  match '*a',           to: 'static#notfound'
 end
