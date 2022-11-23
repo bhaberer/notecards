@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
-  default from: '365notecards@gmail.com'
   def reminder(user)
     @username = user.username
 
