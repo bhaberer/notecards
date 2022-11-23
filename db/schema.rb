@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,46 +12,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_22_232020) do
+ActiveRecord::Schema[7.0].define(version: 20_221_122_232_020) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "cards", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "day"
-    t.integer "month"
-    t.integer "year"
-    t.text "entry"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "rotation", limit: 255
-    t.datetime "time_in", precision: nil
-    t.datetime "time_out", precision: nil
-    t.integer "notes_duration"
+  create_table 'cards', id: :serial, force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'day'
+    t.integer 'month'
+    t.integer 'year'
+    t.text 'entry'
+    t.datetime 'created_at', precision: nil
+    t.datetime 'updated_at', precision: nil
+    t.string 'rotation', limit: 255
+    t.datetime 'time_in', precision: nil
+    t.datetime 'time_out', precision: nil
+    t.integer 'notes_duration'
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 128, default: "", null: false
-    t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
-    t.string "current_sign_in_ip", limit: 255
-    t.string "last_sign_in_ip", limit: 255
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "username", limit: 255
-    t.boolean "admin", default: false
-    t.boolean "public", default: false
-    t.string "time_zone", limit: 255, default: "Pacific Time (US & Canada)"
-    t.boolean "email_reminder", default: false
-    t.string "unconfirmed_email", limit: 255
-    t.boolean "vet", default: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', id: :serial, force: :cascade do |t|
+    t.string 'email', limit: 255, default: '', null: false
+    t.string 'encrypted_password', limit: 128, default: '', null: false
+    t.string 'reset_password_token', limit: 255
+    t.datetime 'reset_password_sent_at', precision: nil
+    t.datetime 'remember_created_at', precision: nil
+    t.integer 'sign_in_count', default: 0
+    t.datetime 'current_sign_in_at', precision: nil
+    t.datetime 'last_sign_in_at', precision: nil
+    t.string 'current_sign_in_ip', limit: 255
+    t.string 'last_sign_in_ip', limit: 255
+    t.datetime 'created_at', precision: nil
+    t.datetime 'updated_at', precision: nil
+    t.string 'username', limit: 255
+    t.boolean 'admin', default: false
+    t.boolean 'public', default: false
+    t.string 'time_zone', limit: 255, default: 'Pacific Time (US & Canada)'
+    t.boolean 'email_reminder', default: false
+    t.string 'unconfirmed_email', limit: 255
+    t.boolean 'vet', default: false
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
-
 end

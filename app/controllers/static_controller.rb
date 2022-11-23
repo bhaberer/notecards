@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class StaticController < ApplicationController
-
   def index
-    if user_signed_in?
-      redirect_to home_path
-    end
+    return unless user_signed_in?
+
+    redirect_to home_path
   end
 
-  def notfound
-  end
+  def notfound; end
 end

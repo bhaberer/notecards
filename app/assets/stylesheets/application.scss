@@ -6,6 +6,11 @@ $medium: #5E5C60;
 $dark: #333333;
 $accent: #2E1E3F;
 
+
+body {
+  margin-top: 70px;
+}
+
 @mixin defdiv {
   background: white;
   box-shadow: 0 0 5px $accent;

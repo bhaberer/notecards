@@ -1,0 +1,7 @@
+- if notice.present? || alert.present?
+  .row
+    .col-md-8.offset-md-2
+      .alert.alert-warning{ style: "margin-top: 10px" }
+        %button.btn-close{ type: :button, 'data-bs-dismiss' => :alert, "aria-label": "Close"}
+        = notice
+        = alert
