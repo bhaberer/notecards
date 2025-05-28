@@ -41,21 +41,32 @@ input[type="checkbox"] {
 }
 
 #cardbox_months {
-  td.day {
-    width: 95px;
-    height: 75px;
-    margin: 0;
-    a {
-      width: 95px;
-      height: 95px;
-      position: absolute;
-      &:hover {
-        text-decoration: none;
-        background-color: lightblue;
+  .month {
+    .days {
+      .week {
+        .day {
+
+        }
       }
     }
   }
 }
+//     .day {
+//       width: 95px;
+//       height: 95px;
+//       margin: 0;
+//       a {
+//         width: 95px;
+//         height: 95px;
+//         position: absolute;
+//         &:hover {
+//           text-decoration: none;
+//           background-color: lightblue;
+//         }
+//       }
+//     }
+//   }
+// }
 
 #cards_day {
   .day{

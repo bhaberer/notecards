@@ -31,20 +31,17 @@ class Card < ApplicationRecord
   }.freeze
 
   validates :notes_duration,
-            presence: { message: 'You need to fill this out (It can be 0)' }
-
-  validates :rotation, inclusion: { in: SHIFTS.keys.map(&:to_s),
-                                    message: 'You need to select a rotation.' },
-                       allow_nil: true
-
-  validates :user_id, uniqueness: { scope: %i[day month year],
-                                    message: 'already has an entry for that day' }
-
-  validates :day, presence: true, inclusion: { in: 1..31 }
-
-  validates :month, presence: true, inclusion: { in: 1..12 }
-
-  validates :year, presence: true, format: { with: /\A^\d{4}$\z/ }
+      presence: { message: 'You need to fill this out (It can be 0)' }
+  validates :rotation,
+      inclusion: { in: SHIFTS.keys.map(&:to_s), message: 'You need to select a rotation.' }, allow_nil: true
+  validates :user_id,
+      uniqueness: { scope: %i[day month year], message: 'already has an entry for that day' }
+  validates :day,
+      presence: true, inclusion: { in: 1..31 }
+  validates :month,
+      presence: true, inclusion: { in: 1..12 }
+  validates :year,
+      presence: true, format: { with: /\A^\d{4}$\z/ }
 
   validates :user, presence: true
 

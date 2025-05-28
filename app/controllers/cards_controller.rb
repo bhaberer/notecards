@@ -27,11 +27,6 @@ class CardsController < ApplicationController
     @user = User.find_by!(username: params[:username])
     @cards = @user.last_entries
 
-    @months = Date::MONTHNAMES[1..12]
-    @month_days = {}
-    (1..12).each do |m|
-      @month_days[m - 1] = Time.days_in_month(m)
-    end
   end
 
   def new

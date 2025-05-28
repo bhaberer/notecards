@@ -1,22 +1,26 @@
 .content
   .row
-    .span3
-      %ul#cardbox_nav.nav.nav-list{ 'data-spy' => 'affix', 'data-offset-top' => 0 }
+    .col-md-3
+      %ul#cardbox_nav{ 'data-spy' => 'affix', 'data-offset-top' => 0 }
         - @months.each do |month|
           %li
             = link_to "##{month.downcase}" do
               = month
               %i.icon-chevron-right
-    .span9#cardbox_months
-      - @months.each_with_index do |month, m_num|
-        .month{ :id => month.downcase }
-          %h1= month
-          %table.table.table-bordered
+    .col-md-9#cardbox_months
+      - months_hash.values.each do |month|
+        .month{ :id => month["number"] }
+          %h1= month["month_name"]
+          .days
+          
             - @month_days[m_num].times do |num|
               - if (num) % 7 == 0
                 %tr
-              %td.day
-                = link_to "#{num + 1}", user_day_path(params[:username], m_num + 1, num + 1)
+              %td
+                .day
+                  .date= link_to "#{num + 1}", user_day_path(params[:username], m_num + 1, num + 1)
+                  %br
+                  .count= entry_count(params[:username], m_num + 1, num + 1)
             - unless (@month_days[m_num] % 7).zero?
               - (7 - (@month_days[m_num] % 7)).times do
                 %td.dim
